@@ -1,11 +1,12 @@
 import React from 'react'
-import BannerWithNavbar from '../Ui/navbar'
+
 import Appointment from '../Ui/Home-journal/createAppoinment'
+import BannerWithNavbar from '../Ui/BannerWithNavbar'
 
 function Home() {
   return (
     <div>
-      <BannerWithNavbar/>
+      {/* <BannerWithNavbar/> */}
       <Appointment/>
     </div>
   )

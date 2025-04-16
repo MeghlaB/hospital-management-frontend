@@ -3,7 +3,7 @@ import appointment from "/src/assets/appoinments.png";
 
 function Appointment() {
   return (
-    <div className="container mx-auto rounded-md bg-[#625fff] my-16 px-6 py-10">
+    <div className="container mx-auto rounded-md bg-gradient-to-r from-orange-300 to-orange-100  my-16 px-6 py-10">
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Text Section */}
         <div className="text-center md:text-left md:w-1/2 space-y-6 ">
