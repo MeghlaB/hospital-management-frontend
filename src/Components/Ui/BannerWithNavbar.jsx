@@ -2,10 +2,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import banner from '/src/assets/hospital-banner.jpg'
+import UseAuth from "../../Hooks/UseAuth";
 
 
 function BannerWithNavbar() {
+  const {user, logOut} = UseAuth()
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // handlelogout
+  const handlelogout =()=>{
+    logOut()
+    .then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      console.log(error.message)
+      // An error happened.
+    });
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,10 +47,18 @@ function BannerWithNavbar() {
             <Link to={"/contact"}  className='hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300'>Contact</Link>
             <Link to={"/doctor-list"}  className='hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300'>Doctor List</Link>
             <Link to={"/doctor-appointment-booking"}  className='hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300'>Appointment </Link>
+
+           {
+            user?<>
+            <button onClick={handlelogout} className=
+            "px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"> Log Out </button>
+            </>:<>
             <Link to={"/login"}  className=
             "px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"> Login </Link>
             <Link to={"/register"}  className=
             "px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"> Register </Link>
+            </>
+           }
           </div>
         </div>
       </div>

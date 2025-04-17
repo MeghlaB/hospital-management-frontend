@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Home from '../Components/Home/Home'
+
 import { Outlet, useLocation } from 'react-router-dom'
 import BannerWithNavbar from '../Components/Ui/BannerWithNavbar'
-import Navbar from '../Components/Ui/navbar'
 import Footer from '../Components/Footer/Footer'
+import Navbar from '../Components/Ui/Navbar'
 
 
 function MainLayout() {
@@ -16,7 +16,10 @@ function MainLayout() {
     <div>
 
 {!noheaderFooter && (isHome ?<BannerWithNavbar/> :<Navbar/>)}
-    <Outlet/>
+<div className='min-h-[calc(100vh-288px)] mb-15'>  
+
+<Outlet/>
+</div>
  {!noheaderFooter &&    <Footer/>}
     </div>
   )

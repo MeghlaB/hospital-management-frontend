@@ -1,7 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../Hooks/UseAuth";
 
 function Navbar() {
+  const { user, logOut } = UseAuth();
+  // handlelogout
+  const handlelogout = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // An error happened.
+      });
+  };
+
   return (
     <div
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300"bg-white shadow-md`}
@@ -37,12 +51,36 @@ function Navbar() {
             to={"/doctor-appointment-booking"}
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
-             Appointment 
+            Appointment
           </Link>
-          <Link to={"/login"}  className=
-                      "px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"> Login </Link>
-                      <Link to={"/register"}  className=
-                      "px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"> Register </Link>
+          {user ? (
+            <>
+              <button
+                onClick={handlelogout}
+                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+              >
+                {" "}
+                Log Out{" "}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to={"/login"}
+                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+              >
+                {" "}
+                Login{" "}
+              </Link>
+              <Link
+                to={"/register"}
+                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+              >
+                {" "}
+                Register{" "}
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
