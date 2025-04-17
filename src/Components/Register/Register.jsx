@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
+
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 function Register() {
-  const {createUser} = useContext(AuthContext)
- 
+  const { createUser } = UseAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
 
- 
     formState: { errors },
   } = useForm();
 
@@ -19,23 +20,27 @@ function Register() {
     console.log(data);
 
     // user regsiter
-    createUser(data?.email , data?.password)
-    .then((result)=>{
-      const loggedUser = result.user
-      console.log(loggedUser)
-    })
-    
+    createUser(data?.email, data?.password).then((result) => {
+      const loggedUser = result.user;
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Create Account Succesfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+      console.log(loggedUser);
+    });
   };
-
-
 
   return (
     <div>
       <div className="mx-auto w-full max-w-md space-y-4 rounded-lg  bg-white p-10 shadow-lg mt-35">
         <h1 className="text-3xl font-semibold">Create Account</h1>
-        <form onSubmit={handleSubmit(onSubmit)}  className="space-y-6">
-        {/* name */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* name */}
+          <div className="space-y-2 text-sm text-zinc-800 ">
             <label htmlFor="username_2" className="block font-medium">
               Name*
             </label>
@@ -43,13 +48,14 @@ function Register() {
               className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
               id="username_2"
               placeholder="Enter name"
-              {...register("name",{required:true})}
+              {...register("name", { required: true })}
               name="name"
               type="text"
-              
             />
             {/* Error Messages */}
-            {errors.name && <span className="text-red-600 text-[14px]">Name is required</span>}
+            {errors.name && (
+              <span className="text-red-600 text-[14px]">Name is required</span>
+            )}
           </div>
           {/* email */}
           <div className="space-y-2 text-sm text-zinc-800 ">
@@ -60,12 +66,16 @@ function Register() {
               className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
               id="username_2"
               placeholder="Enter email"
-              {...register("email",{required:true})}
+              {...register("email", { required: true })}
               name="email"
               type="text"
             />
             {/* Error Messages */}
-            {errors.email && <span className="text-red-600 text-[14px]">Email is required</span>}
+            {errors.email && (
+              <span className="text-red-600 text-[14px]">
+                Email is required
+              </span>
+            )}
           </div>
           {/* password */}
           <div className="space-y-2 text-sm text-zinc-800 ">
@@ -78,27 +88,42 @@ function Register() {
               placeholder="Enter password"
               name="password"
               type="password"
-              {...register("password",
-              { required: true, 
-              minLength:6,
-              maxLength: 20 ,
-              pattern:{
-                value: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*\W)(?!.* )/,
-                 
-              }
-              
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                maxLength: 20,
+                pattern: {
+                  value: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*\W)(?!.* )/,
+                },
               })}
             />
             {/* Error Messages */}
-            {errors.password?.type==='required'&& <span className="text-red-600 text-[14px]"> Password must be 6  characters*</span>}
-            {errors.password?.type==='maxLength' && <span className="text-red-600 text-[14px]"> Password must be less 20  characters*</span>}
+            {errors.password?.type === "required" && (
+              <span className="text-red-600 text-[14px]">
+                {" "}
+                Password must be 6 characters*
+              </span>
+            )}
+            {errors.password?.type === "maxLength" && (
+              <span className="text-red-600 text-[14px]">
+                {" "}
+                Password must be less 20 characters*
+              </span>
+            )}
 
-            {errors.password?.type==='pattern' && <span className="text-red-600 text-[14px]"> Password must contain at least 1 uppercase, 1 lowercase, 1 number & be 6 characters long*</span>}
+            {errors.password?.type === "pattern" && (
+              <span className="text-red-600 text-[14px]">
+                {" "}
+                Password must contain at least 1 uppercase, 1 lowercase, 1
+                number & be 6 characters long*
+              </span>
+            )}
           </div>
           <input
-          className="w-full rounded-md  bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white transition-colors  "
-           type="submit" 
-           value={'Sigin Up'} />
+            className="w-full rounded-md  bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white transition-colors  "
+            type="submit"
+            value={"Sigin Up"}
+          />
           {/* <button className="w-full rounded-md  bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white transition-colors  ">
            SignUp
           </button> */}

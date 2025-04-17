@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import banner from '/src/assets/hospital-banner.jpg'
 import UseAuth from "../../Hooks/UseAuth";
+import Swal from "sweetalert2";
 
 
 function BannerWithNavbar() {
@@ -13,6 +14,23 @@ function BannerWithNavbar() {
   const handlelogout =()=>{
     logOut()
     .then(() => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "User Logout",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Sign-out successful..",
+            icon: "success"
+          });
+        }
+      });
       // Sign-out successful.
     }).catch((error) => {
       console.log(error.message)

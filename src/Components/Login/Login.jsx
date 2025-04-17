@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import UseAuth from '../../Hooks/UseAuth'
+import Swal from 'sweetalert2'
 
 function Login() {
     const {signIn} = UseAuth()
+    const navigate = useNavigate()
     const handleLogin = (e) =>{
         e.preventDefault()
         const from = e.target
@@ -15,6 +17,14 @@ function Login() {
         signIn(email,password)
         .then((userCredential)=>{
             const user = userCredential.user
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "User Loggin SuccesFully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/')
             console.log(user)
         })
 

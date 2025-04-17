@@ -7,6 +7,7 @@ import Contacts from "../Components/Contacts/Contacts";
 import About from "../Components/About/About";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import Privetroutes from "./Privetroutes";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/doctor-appointment-booking",
-        element: <Appoinment />,
+        element: <Privetroutes><Appoinment /></Privetroutes>,
       },
       {
         path: "/login",
