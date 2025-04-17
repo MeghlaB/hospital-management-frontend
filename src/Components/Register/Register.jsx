@@ -6,12 +6,13 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 
 function Register() {
-  const { createUser } = UseAuth();
+  const { createUser , updateUserprofile } = UseAuth();
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    reset,
 
     formState: { errors },
   } = useForm();
@@ -20,16 +21,27 @@ function Register() {
     console.log(data);
 
     // user regsiter
-    createUser(data?.email, data?.password).then((result) => {
+    createUser(data?.email, data?.password)
+    .then((result) => {
       const loggedUser = result.user;
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "Create Account Succesfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/");
+      updateUserprofile (data.name , data.photo)
+      .then(()=>{
+        console.log('user profile info')
+        reset()
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Create Account Succesfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      
+      })
+      .catch=(err)=>{
+        console.log(err)
+      }
+     
       console.log(loggedUser);
     });
   };
@@ -55,6 +67,24 @@ function Register() {
             {/* Error Messages */}
             {errors.name && (
               <span className="text-red-600 text-[14px]">Name is required</span>
+            )}
+          </div>
+          {/*photoUrl */}
+          <div className="space-y-2 text-sm text-zinc-800 ">
+            <label htmlFor="username_2" className="block font-medium">
+              Photo*
+            </label>
+            <input
+              className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
+              id="username_2"
+              placeholder="Enter Photo-Url"
+              {...register("photo", { required: true })}
+              name="photo"
+              type="url"
+            />
+            {/* Error Messages */}
+            {errors.photo && (
+              <span className="text-red-600 text-[14px]">Photourl is required</span>
             )}
           </div>
           {/* email */}
