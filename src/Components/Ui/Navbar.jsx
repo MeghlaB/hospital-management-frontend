@@ -54,33 +54,46 @@ function Navbar() {
             Appointment
           </Link>
           {user ? (
-            <>
-              <button
-                onClick={handlelogout}
-                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
-              >
-                {" "}
-                Log Out{" "}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to={"/login"}
-                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
-              >
-                {" "}
-                Login{" "}
-              </Link>
-              <Link
-                to={"/register"}
-                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
-              >
-                {" "}
-                Register{" "}
-              </Link>
-            </>
-          )}
+                        <div className="dropdown dropdown-end space-y-3">
+                          <label
+                            tabIndex={0}
+                            className="btn btn-ghost btn-circle avatar"
+                          >
+                            <div className="w-10 rounded-full border-2 border-teal-600">
+                              <img
+                                src={user.photoURL || "/default-avatar.png"}
+                                alt="User Avatar"
+                              />
+                            </div>
+                          </label>
+                          <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4"
+                          >
+                            <li>
+                              <Link to="/dashboard">Dashboard</Link>
+                            </li>
+                            <li>
+                              <button className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"  onClick={handlelogout}>Logout</button>
+                            </li>
+                          </ul>
+                        </div>
+                      ) : (
+                        <>
+                          <Link
+                            to="/login"
+                            className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+                          >
+                            Login
+                          </Link>
+                          <Link
+                            to="/register"
+                            className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+                          >
+                            Register
+                          </Link>
+                        </>
+                      )}
         </div>
       </div>
     </div>

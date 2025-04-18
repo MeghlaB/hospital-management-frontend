@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 function Register() {
+  const axiosPublic = UseAxiosPublic()
   const { createUser , updateUserprofile } = UseAuth();
   const navigate = useNavigate();
 
@@ -27,20 +29,36 @@ function Register() {
       updateUserprofile (data.name , data.photo)
       .then(()=>{
         console.log('user profile info')
-        reset()
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Create Account Succesfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      
+        const userInfo={
+          name:data.name,
+          email:data.email,
+          photo:data.photo,
+          status:'active',
+          role:'user'
+        }
+        console.log(userInfo)
+      // Create User in the database
+      axiosPublic.post('/users',userInfo)
+      .then(res=>{
+        if(res.data.insertedId){
+          console.log('user added to the database')
+          reset()
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Create Account Succesfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+
+        }
       })
-      .catch=(err)=>{
+      .catch((err)=>{
         console.log(err)
-      }
+      })
+      })
+      
      
       console.log(loggedUser);
     });
