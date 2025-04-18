@@ -8,6 +8,7 @@ import About from "../Components/About/About";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import Privetroutes from "./Privetroutes";
+import Dashboard from "../Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>
+  }
 ]);
 
 export default router;
