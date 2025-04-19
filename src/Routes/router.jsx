@@ -9,6 +9,7 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import Privetroutes from "./Privetroutes";
 import Dashboard from "../Dashboard/Dashboard";
+import AdminHome from "../Dashboard/Admin/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,13 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<Dashboard/>
+    element:<Dashboard/>,
+    children:[
+      {
+        path:'/dashboard',
+        element:<AdminHome/>
+      }
+    ]
   }
 ]);
 

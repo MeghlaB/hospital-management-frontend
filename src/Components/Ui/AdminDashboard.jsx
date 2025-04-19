@@ -7,19 +7,12 @@ function AdminDashboard() {
     <aside className="h-screen w-[250px] bg-gray-800 text-white px-4 py-6 hidden md:block fixed top-0 left-0 z-40">
     <div className="text-2xl font-bold mb-10">Admin</div>
     <div className="pb-4" >
-      <Link href="/" className="flex items-center gap-3 hover:text-gray-300">
+      <Link href="/dashboard" className="flex items-center gap-3 hover:text-gray-300">
         <Home size={20} />
-        Home
+        Admin Home
       </Link>
     </div>
     <nav className="space-y-4">
-      <Link
-        href="/dashboard?role=admin"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <LayoutDashboard size={20} />
-        Dashboard
-      </Link>
       <Link
         href="/dashboard/order?role=admin"
         className="flex items-center gap-3 hover:text-gray-300"

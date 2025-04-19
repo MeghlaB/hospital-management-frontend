@@ -1,8 +1,9 @@
 import React from 'react'
 import UserDashboard from '../Components/Ui/UserDashboard';
 import AdminDashboard from '../Components/Ui/AdminDashboard';
+import { Outlet } from 'react-router-dom';
 
-export default function Dashboard({children}) {
+export default function Dashboard() {
     const isAdmin = 'admin'
   return (
     <div>
@@ -17,7 +18,10 @@ export default function Dashboard({children}) {
         {/* Main Content */}
         <div className="md:ml-[250px] w-full">
           
-          <main className="pt-6 px-6">{children}</main>
+          <main className="pt-6 px-6">
+
+          <Outlet/>
+          </main>
         </div>
       </div>
     </div>
