@@ -1,29 +1,46 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
+import Swal from "sweetalert2";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddDoctorForm = () => {
-  const axiosPublic = UseAxiosPublic()
+
+  const axiosPublic = UseAxiosPublic();
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
-
+reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log("Doctor Data:", data);
+    
     const doctorinfo = {
-      name:data?.name,
-      email:data?.email,
-      gender:data?.gender,
-      phone:data?.phone,
-      specialization:data?.specialization,
-      time:data?.time,
-      image:data?.image[0].name,
+      name: data?.name,
+      email: data?.email,
+      gender: data?.gender,
+      phone: data?.phone,
+      specialization: data?.specialization,
+      time: data?.time,
+      image: data?.image[0].name,
+    };
+    console.log(doctorinfo);
+    axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
+      console.log(res.data);
+      reset()
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Doctor Added SuccessFully",
+          icon: "success",
+          draggable: true,
+        });
+        navigate('/doctor-list')
 
-    }
-    console.log(doctorinfo)
+      }
+    });
   };
 
   return (
