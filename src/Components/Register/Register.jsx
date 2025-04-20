@@ -8,7 +8,7 @@ import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 function Register() {
   const axiosPublic = UseAxiosPublic()
-  const { createUser , updateUserprofile } = UseAuth();
+  const { createUser , updateUserprofile,GoogleLogin } = UseAuth();
   const navigate = useNavigate();
 
   const {
@@ -63,6 +63,36 @@ function Register() {
       console.log(loggedUser);
     });
   };
+
+  // Google sign in with user
+  const handleGoogleSign = ()=>{
+    GoogleLogin()
+    .then(res=>{
+      console.log(res.user)
+      const userInfo = {
+        email:res.user?.email,
+        name:res.user?.displayName,
+        photo:res.user?.photoURL
+      }
+      axiosPublic.post('/users',userInfo)
+      .then(res=>{
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Create Account Succesfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+       
+        navigate('/')
+      })
+     
+    })
+  }
+
+
 
   return (
     <div>
@@ -189,7 +219,7 @@ function Register() {
         </div>
         {/* Social icons */}
         <div className="flex justify-center space-x-4 *:border hover:*:bg-zinc-400/20 *:dark:border-zinc-700">
-          <button aria-label="Log in with Google" className="rounded-full p-3">
+          <button onClick={handleGoogleSign} aria-label="Log in with Google" className="rounded-full p-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"

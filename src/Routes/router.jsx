@@ -10,6 +10,8 @@ import Register from "../Components/Register/Register";
 import Privetroutes from "./Privetroutes";
 import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/Admin/AdminHome";
+import DoctorManagement from "../Dashboard/Admin/DoctorManagement";
+import AddDoctor from "../Dashboard/Admin/AddDoctor";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +50,19 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<Dashboard/>,
+    element:<Privetroutes><Dashboard/></Privetroutes>,
     children:[
       {
-        path:'/dashboard',
+        path:'',
         element:<AdminHome/>
+      },
+      {
+        path:'doctor-management',
+        element:<DoctorManagement/>
+      },
+      {
+        path:'add-doctor',
+        element:<AddDoctor/>
       }
     ]
   }
