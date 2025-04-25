@@ -25,6 +25,7 @@ reset,
       phone: data?.phone,
       specialization: data?.specialization,
       time: data?.time,
+      appoinmetfee:data?.fee,
       image: data?.image,
       status:'availble'
     };
@@ -156,6 +157,7 @@ reset,
           <div className="col-span-2">
             <label className="block font-semibold mb-1">Available Time</label>
             <input
+            type="date"
               {...register("time", { required: "Available time is required" })}
               className="input input-bordered w-full"
               placeholder="e.g., 10:00 AM - 1:00 PM"
@@ -164,7 +166,20 @@ reset,
               <p className="text-red-500 text-sm">{errors.time.message}</p>
             )}
           </div>
-          {/* Short Bio */}
+          {/* Fee*/}
+          <div className="col-span-2">
+            <label className="block font-semibold mb-1">Appointment fee</label>
+            <textarea
+              {...register("fee", { required: "Short bio is required" })}
+              className="input input-bordered w-full"
+              placeholder="doctor appoinment fee..."
+             
+            />
+            {errors.fee&& (
+              <p className="text-red-500 text-sm">{errors.fee.message}</p>
+            )}
+          </div>
+
           {/* Short Bio */}
           <div className="col-span-2">
             <label className="block font-semibold mb-1">Short Bio</label>

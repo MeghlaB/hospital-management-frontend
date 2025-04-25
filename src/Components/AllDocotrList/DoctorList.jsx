@@ -1,11 +1,12 @@
-
 import React, { useState } from "react";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 
 function DoctorList() {
   const axiosPublic = UseAxiosPublic();
   const [selectedSpecialization, setselectedSpecialization] = useState(null);
+  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -72,36 +73,51 @@ function DoctorList() {
           ))}
         </div>
         {/* Right Side: Doctor Cards */}
-        <div className="col-span-9 boder">
-          <div className=" grid grid-cols-3 gap-5 ">
+        <div className="col-span-9">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+         
+          >
             {filteredDoctors.length === 0 ? (
-              <p className="text-center col-span-3 text-red-500">
-                {" "}
-                No Doctors Found For {selectedSpecialization}
+              <p className="text-center col-span-3 text-red-500 text-lg font-semibold">
+                No Doctors Found For{" "}
+                <span className="text-green-600">{selectedSpecialization}</span>
               </p>
             ) : (
               filteredDoctors.map((doctor) => (
                 <div
                   key={doctor._id}
-                  className="card bg-base-100 w-56 shadow-sm"
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
+                  onClick={()=>navigate(`/doctors/${doctor._id}`)}
                 >
-                  <figure>
+                  <figure className="h-56 overflow-hidden">
                     <img
                       src={doctor.image}
-                      className="w-full object-cover bg-[#EAEFFF]"
                       alt={doctor.name}
+                      className="w-full h-full object-cover"
                     />
                   </figure>
-                  <div className="card-body">
-                    <h2 className="text-green-600">
-                      <span className="font-extrabold">.</span>
+                  <div className="p-4 space-y-2">
+                    <h2 className="text-sm font-medium text-green-600 flex items-center gap-1">
+                      <span className="text-lg font-bold text-green-500">
+                        •
+                      </span>
                       {doctor.status}
                     </h2>
-                    <p className="text-xl font-semibold">{doctor.name}</p>
-                    <p className="text-gray-500">{doctor.specialization}</p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {doctor.name}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {doctor.specialization}
+                    </p>
+                    {/* <Link to={"/doctor-appointment-booking"}>
+                      <button className="mt-3 w-full bg-[#00786F] text-white py-2 rounded-xl hover:bg-[#00786F] transition">
+                        Book Appointment
+                      </button>
+                    </Link> */}
                   </div>
                 </div>
-              )))}
+              ))
+            )}
           </div>
         </div>
       </div>

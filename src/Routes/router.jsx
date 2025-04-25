@@ -12,6 +12,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/Admin/AdminHome";
 import DoctorManagement from "../Dashboard/Admin/DoctorManagement";
 import AddDoctor from "../Dashboard/Admin/AddDoctor";
+import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/doctor-appointment-booking",
-        element: <Privetroutes><Appoinment /></Privetroutes>,
+        element: (
+          <Privetroutes>
+            <Appoinment />
+          </Privetroutes>
+        ),
+      },
+      {
+        path: "/doctors/:id",
+        element: (
+          <Privetroutes>
+            <DoctorDetails />
+          </Privetroutes>
+        ),
       },
       {
         path: "/login",
@@ -49,23 +62,27 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'/dashboard',
-    element:<Privetroutes><Dashboard/></Privetroutes>,
-    children:[
+    path: "/dashboard",
+    element: (
+      <Privetroutes>
+        <Dashboard />
+      </Privetroutes>
+    ),
+    children: [
       {
-        path:'',
-        element:<AdminHome/>
+        path: "",
+        element: <AdminHome />,
       },
       {
-        path:'doctor-management',
-        element:<DoctorManagement/>
+        path: "doctor-management",
+        element: <DoctorManagement />,
       },
       {
-        path:'add-doctor',
-        element:<AddDoctor/>
-      }
-    ]
-  }
+        path: "add-doctor",
+        element: <AddDoctor />,
+      },
+    ],
+  },
 ]);
 
 export default router;
