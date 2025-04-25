@@ -25,7 +25,8 @@ reset,
       phone: data?.phone,
       specialization: data?.specialization,
       time: data?.time,
-      image: data?.image[0].name,
+      image: data?.image,
+      status:'availble'
     };
     console.log(doctorinfo);
     axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
@@ -142,7 +143,7 @@ reset,
           <div>
             <label className="block font-semibold mb-1">Profile Image</label>
             <input
-              type="file"
+              type="url"
               {...register("image", { required: "Profile image is required" })}
               className="file-input file-input-bordered w-full"
             />
