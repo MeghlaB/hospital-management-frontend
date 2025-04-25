@@ -27,7 +27,8 @@ reset,
       time: data?.time,
       appoinmetfee:data?.fee,
       image: data?.image,
-      status:'availble'
+      status:'availble',
+      bio:data?.bio
     };
     console.log(doctorinfo);
     axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
