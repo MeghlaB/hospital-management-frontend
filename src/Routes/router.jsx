@@ -13,6 +13,7 @@ import AdminHome from "../Dashboard/Admin/AdminHome";
 import DoctorManagement from "../Dashboard/Admin/DoctorManagement";
 import AddDoctor from "../Dashboard/Admin/AddDoctor";
 import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
+import UserManagement from "../Dashboard/Admin/UserManagement";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
         path: "add-doctor",
         element: <AddDoctor />,
       },
+      {
+        path:'user-management',
+        element:<UserManagement/>
+      }
     ],
   },
 ]);

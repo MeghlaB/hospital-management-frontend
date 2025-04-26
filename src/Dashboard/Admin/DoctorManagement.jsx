@@ -1,44 +1,51 @@
 import React from 'react'
+import useAxiosSequire from '../../Hooks/UseAxiosSequir'
+import { useQuery } from '@tanstack/react-query'
 
 function DoctorManagement() {
+  const axiosSequire = useAxiosSequire()
+  const { data: doctors = [] } = useQuery({
+    queryKey: ['doctors'],
+    queryFn: async () => {
+      const res = await axiosSequire.get('/doctors')
+      console.log(res.data)
+      return res.data
+    }
+  })
+
   return (
     <div>
       <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-      <tr className="hover:bg-base-300">
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>#</th>
+            
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Fees</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* doctors rows */}
+            {
+              doctors.map((doctor, index) => (
+                <tr key={doctor._id}>
+                  <th>{index + 1}</th>
+                  <td>{doctor?.name}</td>
+                  <td>{doctor?.specialization}</td>
+                  <td>{doctor?.email}</td>
+                  <td>{doctor?.status}</td>
+                  <td>{doctor?.fee || 'N/A'}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
