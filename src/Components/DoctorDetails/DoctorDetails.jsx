@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
@@ -109,12 +109,22 @@ function DoctorDetails() {
 
           {/* Book Appointment Button */}
           <div className="mt-8">
-            <button
+           <Link to={'/doctor-appointment-booking'}
+           state={{
+            doctorId:id,
+            doctorName:doctor?.name,
+            fee:doctor?.fee,
+            selectedDate,
+            selectedTime
+           }}
+           
+           >
+           <button
               className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition"
-              disabled={!selectedDate || !selectedTime}
             >
               Book an appointment
             </button>
+           </Link>
           </div>
         </div>
       </div>

@@ -58,7 +58,7 @@ function Navbar() {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full border-2 border-teal-600">
                   <img
-                    src={user.photoURL || "/default-avatar.png"}
+                    src={user?.photoURL || "/default-avatar.png"}
                     alt="User Avatar"
                   />
                 </div>
