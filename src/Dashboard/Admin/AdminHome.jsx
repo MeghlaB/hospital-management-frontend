@@ -1,8 +1,32 @@
 import { BookImage } from "lucide-react";
 import React from "react";
 import ApexChart from "../../Components/Charts/Charts";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSequire from "../../Hooks/UseAxiosSequir";
 
 function AdminHome() {
+  const axiosSequire = useAxiosSequire();
+
+  // all doctors
+  const { data:dactors=[] } = useQuery({
+    queryKey: ["doctors"],
+    queryFn: async () => {
+      const res = await axiosSequire.get("/doctors");
+      console.log(res.data);
+      return res.data;
+    },
+  });
+
+  // all appoinments
+  const {data:appoinments=[]} =useQuery({
+    queryKey:['appoinments'],
+    queryFn:async ()=>{
+      const res = await axiosSequire.get('/appoinments')
+      console.log(res.data)
+      return res.data
+    }
+  })
+
   return (
     <div className="container mx-auto ">
       <h1 className="text-2xl font-bold text-teal-600">Hi , WelCome Back</h1>
@@ -16,7 +40,10 @@ function AdminHome() {
                 className="w-12 h-12 rounded-full"
               ></img>
             </div>
-            <div className="text-xl font-bold text-white">Total Doctors</div>
+            <div className="text-xl font-bold text-white  flex items-center  gap-3">
+              <p className="text-[16px]">Total Doctors </p>
+              <p>{dactors?.length}</p>
+            </div>
           </div>
         </div>
 
@@ -40,9 +67,11 @@ function AdminHome() {
                 src="/src/assets/doctor-appoinment.jpg"
                 className="w-12 h-12 rounded-full"
               ></img>
-             
             </div>
-            <div className="text-xl font-bold text-white">Appointments</div>
+            <div className="text-xl font-bold text-white  flex items-center  gap-3">
+              <p className="text-[16px]">Appoinments</p>
+              <p>{appoinments?.length}</p>
+            </div>
           </div>
         </div>
         {/* grid-4 */}
@@ -60,7 +89,7 @@ function AdminHome() {
       </div>
       {/* charts */}
       <div>
-        <ApexChart/>
+        <ApexChart />
       </div>
     </div>
   );
