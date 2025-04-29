@@ -6,7 +6,7 @@ import useAxiosSequire from "./UseAxiosSequir";
 function UseAdmin() {
   const { user } = UseAuth();
   const axiosSequire = useAxiosSequire();
-  const { data: isAdmin ,isPending:isAdminPending } = useQuery({
+  const { data: isAdmin } = useQuery({
     queryKey: [user?.email, 'isAdmin'],
     queryFn: async () => {
       const res = await axiosSequire.get(`/users/admin/${user?.email}`);
@@ -14,7 +14,7 @@ function UseAdmin() {
       return res?.data?.admin;
     },
   });
-  return [isAdmin,isAdminPending];
+  return [isAdmin];
 }
 
 export default UseAdmin;

@@ -6,8 +6,6 @@ import UseAdmin from '../Hooks/UseAdmin';
 
 export default function Dashboard() {
     const [isAdmin] = UseAdmin()
-    console.log(isAdmin)
-    
   return (
     <div>
       <div>
