@@ -14,6 +14,7 @@ import DoctorManagement from "../Dashboard/Admin/DoctorManagement";
 import AddDoctor from "../Dashboard/Admin/AddDoctor";
 import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
 import UserManagement from "../Dashboard/Admin/UserManagement";
+import MyAppoinment from "../Dashboard/User/MyAppoinment";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
       </Privetroutes>
     ),
     children: [
+      // admin dashboard
       {
         path: "",
         element: <AdminHome />,
@@ -85,6 +87,12 @@ const router = createBrowserRouter([
       {
         path:'user-management',
         element:<UserManagement/>
+      }
+      ,
+      // user dashboard
+      {
+        path:'my-appoinments',
+        element:<MyAppoinment></MyAppoinment>
       }
     ],
   },

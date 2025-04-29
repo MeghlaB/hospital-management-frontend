@@ -1,63 +1,48 @@
-import { Heart, Home, HomeIcon, LayoutDashboard, Package, ShoppingCart, User } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { BookIcon, Home, LayoutDashboard } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function UserDashboard() {
   return (
-    <aside className="h-screen w-[250px] bg-gray-800 text-white px-4 py-6 hidden md:block fixed top-0 left-0 z-40">
-    <div className="text-2xl font-bold mb-10">User</div>
-    <div className="pb-4">
-      <Link href="/" className="flex items-center gap-3 hover:text-gray-300">
-        <Home size={20} />
-        Home
-      </Link>
-    </div>
-    <nav className="space-y-4">
-      <Link
-        href="/dashboard"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <LayoutDashboard size={20} />
-        User-Dashboard
-      </Link>
-      <Link
-        href="/dashboard/user/user-home"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <HomeIcon size={20} />
-        User-Home
-      </Link>
-      <Link
-        href="/dashboard/user/user-cart"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <ShoppingCart size={20} />
-        Cart
-      </Link>
-      <Link
-        href="/dashboard/user/user-order"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <Package size={20} />
-        Order
-      </Link>
-      <Link
-        href="/dashboard/user/user-wish-list"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <Heart size={20} />
-        Wish-List
-      </Link>
-      <Link
-        href="/dashboard/user/user-profile"
-        className="flex items-center gap-3 hover:text-gray-300"
-      >
-        <User size={20} />
-        User-Profile
-      </Link>
-    </nav>
-  </aside>
-  )
+    <aside className="h-screen w-[250px] bg-gray-800 text-white px-4 py-6 hidden md:flex flex-col justify-between fixed top-0 left-0 z-40">
+      {/* Header */}
+      <div>
+        <div className="text-2xl font-bold mb-10">User</div>
+
+        {/* Dashboard Links */}
+        <nav className="space-y-4">
+          <Link
+            to="/dashboard"
+            className="flex items-center gap-3 hover:text-gray-300"
+          >
+            <LayoutDashboard size={20} />
+            User Home
+          </Link>
+
+          <Link
+            to="/dashboard/my-appoinments"
+            className="flex items-center gap-3 hover:text-gray-300"
+          >
+            <BookIcon size={20} />
+            My Appointments
+          </Link>
+        </nav>
+      </div>
+
+      {/* Home Link at Bottom */}
+      <div>
+        <Link
+          to="/"
+          className="flex items-center gap-3 hover:text-gray-300"
+        >
+          <Home size={20} />
+          Home
+        </Link>
+        
+       
+      </div>
+    </aside>
+  );
 }
 
-export default UserDashboard
+export default UserDashboard;
