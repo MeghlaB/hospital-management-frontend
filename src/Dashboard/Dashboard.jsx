@@ -2,9 +2,12 @@ import React from 'react'
 import UserDashboard from '../Components/Ui/UserDashboard';
 import AdminDashboard from '../Components/Ui/AdminDashboard';
 import { Outlet } from 'react-router-dom';
+import UseAdmin from '../Hooks/UseAdmin';
 
 export default function Dashboard() {
-    const isAdmin = 'admin'
+    const [isAdmin] = UseAdmin()
+    console.log(isAdmin)
+    
   return (
     <div>
       <div>
