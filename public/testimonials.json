@@ -1,0 +1,67 @@
+[
+    {
+      "id": 1,
+      "name": "Md. Rafsan",
+      "location": "Dhaka",
+      "message": "Best clinic I've ever visited! Doctors are professional and very helpful.",
+      "image": "https://i.pravatar.cc/100?img=1"
+    },
+    {
+      "id": 2,
+      "name": "Fatima Akter",
+      "location": "Chittagong",
+      "message": "Very caring and attentive service. Highly recommend.",
+      "image": "https://i.pravatar.cc/100?img=2"
+    },
+    {
+      "id": 3,
+      "name": "Imran Hossain",
+      "location": "Sylhet",
+      "message": "Clean environment and friendly staff.",
+      "image": "https://i.pravatar.cc/100?img=3"
+    },
+    {
+      "id": 4,
+      "name": "Shamima Nasrin",
+      "location": "Khulna",
+      "message": "Their dental department is excellent.",
+      "image": "https://i.pravatar.cc/100?img=4"
+    },
+    {
+      "id": 5,
+      "name": "Nayeem Rahman",
+      "location": "Barisal",
+      "message": "Quick appointment process and experienced doctors.",
+      "image": "https://i.pravatar.cc/100?img=5"
+    },
+    {
+      "id": 6,
+      "name": "Lamia Chowdhury",
+      "location": "Rangpur",
+      "message": "Best experience I've had at a hospital.",
+      "image": "https://i.pravatar.cc/100?img=6"
+    },
+    {
+      "id": 7,
+      "name": "Tareq Aziz",
+      "location": "Mymensingh",
+      "message": "Really impressed with the service quality.",
+      "image": "https://i.pravatar.cc/100?img=7"
+    },
+    {
+      "id": 8,
+      "name": "Jannatul Ferdous",
+      "location": "Cumilla",
+      "message": "The pediatricians are wonderful.",
+      "image": "https://i.pravatar.cc/100?img=8"
+    },
+    {
+      "id": 9,
+      "name": "Asif Mahmud",
+      "location": "Rajshahi",
+      "message": "I recovered quickly thanks to their excellent treatment.",
+      "image": "https://i.pravatar.cc/100?img=9"
+    }
+   
+  ]
+  
