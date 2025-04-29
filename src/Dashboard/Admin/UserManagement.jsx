@@ -7,7 +7,11 @@ function UserManagement() {
     const { data: users = [] } = useQuery({
       queryKey: ['doctors'],
       queryFn: async () => {
-        const res = await axiosSequire.get('/users')
+        const res = await axiosSequire.get('/users',{
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('access-token')}`
+          }
+        })
         console.log(res.data)
         return res.data
       }
