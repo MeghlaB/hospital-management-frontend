@@ -1,5 +1,6 @@
 import React from "react";
 import appointment from "/src/assets/appoinments.png";
+import { Link } from "react-router-dom";
 
 function Appointment() {
   return (
@@ -11,9 +12,11 @@ function Appointment() {
             Book Appointment  <br /> With 100+ Trusted Doctors
           </h1>
          
-         <button className="bg-white text-[#625fff] font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition duration-300 mx-4">
+        <Link to={'/register'}>
+        <button className="bg-white text-[#625fff] font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition duration-300 mx-4">
             Create Account
           </button>
+        </Link>
       
         </div>
 

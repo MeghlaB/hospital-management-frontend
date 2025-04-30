@@ -26,6 +26,15 @@ function AdminHome() {
       return res.data
     }
   })
+  // all appoinments
+  const {data:users=[]} =useQuery({
+    queryKey:['users'],
+    queryFn:async ()=>{
+      const res = await axiosSequire.get('/users')
+      console.log(res.data)
+      return res.data
+    }
+  })
 
   return (
     <div className="container mx-auto ">
@@ -83,7 +92,10 @@ function AdminHome() {
                 className="w-12 h-12 rounded-full"
               ></img>
             </div>
-            <div className="text-xl font-bold text-white">Patent</div>
+            <div className="text-xl font-bold text-white  flex items-center  gap-3">
+              <p className="text-[16px]">Users</p>
+              <p>{users?.length}</p>
+            </div>
           </div>
         </div>
       </div>

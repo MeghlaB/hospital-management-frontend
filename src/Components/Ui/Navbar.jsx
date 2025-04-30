@@ -1,60 +1,59 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import UseAuth from "../../Hooks/UseAuth";
+import useAuth from "../../Hooks/UseAuth";
 
 function Navbar() {
-  const { user, logOut } = UseAuth();
-  // handlelogout
-  const handlelogout = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
     logOut()
       .then(() => {
-        // Sign-out successful.
+        // Logout successful
       })
       .catch((error) => {
         console.log(error.message);
-        // An error happened.
       });
   };
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-white shadow-md`}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-white shadow-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
         <div className="text-2xl font-bold text-teal-600">I-Health</div>
-        <div className="space-x-6 text-gray-800 font-medium">
+
+        <div className="flex items-center space-x-6 text-gray-800 font-medium">
           <Link
-            to={"/"}
+            to="/"
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
             Home
           </Link>
           <Link
-            to={"/about"}
+            to="/about"
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
             About
           </Link>
           <Link
-            to={"/contact"}
+            to="/contact"
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
             Contact
           </Link>
           <Link
-            to={"/doctor-list"}
+            to="/doctor-list"
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
             Doctor List
           </Link>
           <Link
-            to={"/doctor-appointment-booking"}
+            to="/doctor-appointment-booking"
             className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
           >
             Appointment
           </Link>
+
           {user ? (
-            <div className="dropdown dropdown-end space-y-3">
+            <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full border-2 border-teal-600">
                   <img
@@ -65,15 +64,15 @@ function Navbar() {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4"
+                className="menu menu-sm dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box w-52 space-y-3 z-[999]"
               >
                 <li>
                   <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
                   <button
+                    onClick={handleLogout}
                     className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
-                    onClick={handlelogout}
                   >
                     Logout
                   </button>
@@ -98,7 +97,7 @@ function Navbar() {
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 
