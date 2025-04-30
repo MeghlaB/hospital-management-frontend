@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/UseAuth";
 
 function Navbar() {
   const { user, logOut } = useAuth();
+    const [role , setRole] = useState(null)
+  
+    useEffect(() => {
+      if (user?.role === 'admin') {
+        fetch(`http://localhost:5000/users/role/${user.email}`)
+          .then(res => res.json())
+          .then(data => setRole(data?.role));
+      }
+    }, [user]);
 
   const handleLogout = () => {
     logOut()
@@ -67,7 +76,7 @@ function Navbar() {
                 className="menu menu-sm dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box w-52 space-y-3 z-[999]"
               >
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to={role === "admin" ? "/dashboard" : "/dashboard/overview"}>Dashboard</Link>
                 </li>
                 <li>
                   <button

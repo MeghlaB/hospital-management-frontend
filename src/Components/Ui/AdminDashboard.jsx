@@ -1,4 +1,4 @@
-import { BarChart2, Boxes, Home, LayoutDashboard, User, UserPlus } from 'lucide-react'
+import { BarChart2, BookImageIcon, Boxes, Home, LayoutDashboard, User, UserPlus } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -33,6 +33,13 @@ function AdminDashboard() {
       >
         <User size={20} />
         User Management
+      </Link>
+      <Link
+        to="/dashboard/all-appoinments"
+        className="flex items-center gap-3 hover:text-gray-300"
+      >
+        <BookImageIcon size={20} />
+        AllApoinments
       </Link>
     </nav>
    

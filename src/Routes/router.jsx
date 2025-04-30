@@ -15,6 +15,10 @@ import AddDoctor from "../Dashboard/Admin/AddDoctor";
 import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
 import UserManagement from "../Dashboard/Admin/UserManagement";
 import MyAppoinment from "../Dashboard/User/MyAppoinment";
+import QucikBooking from "../Dashboard/User/QucikBooking";
+import Notifications from "../Dashboard/User/Notifications";
+import Overview from "../Dashboard/User/Overview";
+import AllApoinments from "../Dashboard/Admin/AllApoinments";
 
 const router = createBrowserRouter([
   {
@@ -87,12 +91,27 @@ const router = createBrowserRouter([
       {
         path:'user-management',
         element:<UserManagement/>
+      },{
+        path:'all-appoinments',
+        element:<AllApoinments/>
       }
       ,
       // user dashboard
       {
+path:'overview',
+element:<Overview/>
+      },
+      {
         path:'my-appoinments',
         element:<MyAppoinment></MyAppoinment>
+      },
+      {
+        path:'quick-booking',
+        element:<QucikBooking/>
+      },
+      {
+        path:'notifications',
+        element:<Notifications/>
       }
     ],
   },
