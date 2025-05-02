@@ -1,5 +1,6 @@
 import { BookIcon, Home, LayoutDashboard, Bell, CalendarCheck2, Timer } from "lucide-react";
 import React from "react";
+import { ImProfile } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 function UserDashboard() {
@@ -36,11 +37,11 @@ function UserDashboard() {
           </Link>
 
           <Link
-            to="/dashboard/notifications"
+            to="/dashboard/user-profile"
             className="flex items-center gap-3 hover:text-gray-300"
           >
-            <Bell size={20} />
-            Notifications
+            <ImProfile size={20} />
+          User-Profile
           </Link>
         </nav>
       </div>

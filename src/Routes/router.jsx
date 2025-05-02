@@ -16,9 +16,10 @@ import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
 import UserManagement from "../Dashboard/Admin/UserManagement";
 import MyAppoinment from "../Dashboard/User/MyAppoinment";
 import QucikBooking from "../Dashboard/User/QucikBooking";
-import Notifications from "../Dashboard/User/Notifications";
+import Notifications from "../Dashboard/User/UserProfile";
 import Overview from "../Dashboard/User/Overview";
 import AllApoinments from "../Dashboard/Admin/AllApoinments";
+import UserProfile from "../Dashboard/User/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -110,8 +111,8 @@ element:<Overview/>
         element:<QucikBooking/>
       },
       {
-        path:'notifications',
-        element:<Notifications/>
+        path:'user-profile',
+        element:<UserProfile/>
       }
     ],
   },

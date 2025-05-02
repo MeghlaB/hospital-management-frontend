@@ -29,7 +29,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     // ImageBB hosting
-    const imageFile = { image: data.photo[0] }; // এখানে "data.image" নয়, "data.photo" হবে
+    const imageFile = { image: data.photo[0] }; 
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
         'Content-Type': 'multipart/form-data',

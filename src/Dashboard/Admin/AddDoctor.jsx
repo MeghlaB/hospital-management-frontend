@@ -4,6 +4,10 @@ import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
 
+
+const image_hosting_key = import.meta.env.VITE_IMAGEHOSTING;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
 const AddDoctorForm = () => {
 
   const axiosPublic = UseAxiosPublic();
@@ -15,35 +19,51 @@ reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Doctor Data:", data);
-    
-    const doctorinfo = {
-      name: data?.name,
-      email: data?.email,
-      gender: data?.gender,
-      phone: data?.phone,
-      specialization: data?.specialization,
-      time: data?.time,
-      appoinmetfee:data?.fee,
-      image: data?.image,
-      status:'availble',
-      bio:data?.bio
-    };
-    console.log(doctorinfo);
-    axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
-      console.log(res.data);
-      reset()
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Doctor Added SuccessFully",
-          icon: "success",
-          draggable: true,
-        });
-        navigate('/doctor-list')
 
-      }
-    });
+ 
+  const onSubmit =  async(data) => {
+    console.log("Doctor Data:", data);
+     // ImageBB hosting
+  const imageFile = { image: data.image[0] }; 
+  const res = await axiosPublic.post(image_hosting_api, imageFile, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+ 
+
+if(res.data.success){
+  const photoURL = res.data.data.display_url;
+  const doctorinfo = {
+    name: data?.name,
+    email: data?.email,
+    gender: data?.gender,
+    phone: data?.phone,
+    specialization: data?.specialization,
+    time: data?.time,
+    appoinmetfee:data?.fee,
+    image: photoURL,
+    status:'availble',
+    bio:data?.bio
+  };
+  console.log(doctorinfo);
+
+  axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
+    console.log(res.data);
+    reset()
+    if (res.data.insertedId) {
+      Swal.fire({
+        title: "Doctor Added SuccessFully",
+        icon: "success",
+        draggable: true,
+      });
+      navigate('/doctor-list')
+
+    }
+  });
+}
+   
   };
 
   return (
@@ -145,7 +165,7 @@ reset,
           <div>
             <label className="block font-semibold mb-1">Profile Image</label>
             <input
-              type="url"
+              type="file"
               {...register("image", { required: "Profile image is required" })}
               className="file-input file-input-bordered w-full"
             />

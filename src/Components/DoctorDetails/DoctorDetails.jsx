@@ -69,7 +69,7 @@ function DoctorDetails() {
           </p>
 
           <p className="mt-4 text-lg font-semibold text-gray-700">
-            Appointment fee: <span className="text-black">${doctor?.fee}</span>
+            Appointment fee: <span className="text-black">${doctor?.appoinmetfee}</span>
           </p>
         </div>
 
