@@ -8,7 +8,7 @@ function Navbar() {
   
     useEffect(() => {
       if (user?.role === 'admin') {
-        fetch(`http://localhost:5000/users/role/${user.email}`)
+        fetch(`https://hospital-server-peach.vercel.app/users/role/${user.email}`)
           .then(res => res.json())
           .then(data => setRole(data?.role));
       }

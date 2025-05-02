@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function DoctorList() {
+  
   const axiosPublic = UseAxiosPublic();
   const [selectedSpecialization, setselectedSpecialization] = useState(null);
-
 
   const {
     isLoading,

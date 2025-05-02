@@ -9,7 +9,7 @@ const Notifications = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/notifications");
+        const response = await axios.get("https://hospital-server-peach.vercel.app/notifications");
         setNotifications(response.data); // Store fetched notifications in state
       } catch (error) {
         console.error("Error fetching notifications", error);

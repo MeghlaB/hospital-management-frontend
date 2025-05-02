@@ -6,6 +6,14 @@ import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
+
+
+
+// ImageBB
+const image_hosting_key = import.meta.env.VITE_IMAGEHOSTING;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
+
 function Register() {
   const axiosPublic = UseAxiosPublic()
   const { createUser , updateUserprofile,GoogleLogin } = UseAuth();
@@ -19,49 +27,55 @@ function Register() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // console.log(data);
-
-    // user regsiter
-    createUser(data?.email, data?.password)
-    .then((result) => {
-      const loggedUser = result.user;
-      updateUserprofile (data.name , data.photo)
-      .then(()=>{
-        // console.log('user profile info')
-        const userInfo={
-          name:data.name,
-          email:data.email,
-          photo:data.photo,
-          status:'active',
-          role:'user'
-        }
-        // console.log(userInfo)
-      // Create User in the database
-      axiosPublic.post('/users',userInfo)
-      .then(res=>{
-        if(res.data.insertedId){
-          // console.log('user added to the database')
-          reset()
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: "Create Account Succesfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
-
-        }
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-      })
-      
-     
-      console.log(loggedUser);
+  const onSubmit = async (data) => {
+    // ImageBB hosting
+    const imageFile = { image: data.photo[0] }; // এখানে "data.image" নয়, "data.photo" হবে
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
+  
+    if (res.data.success) {
+      const photoURL = res.data.data.display_url;
+  
+      createUser(data.email, data.password)
+        .then((result) => {
+          const loggedUser = result.user;
+    
+  
+          updateUserprofile(data.name, photoURL)
+            .then(() => {
+              const userInfo = {
+                name: data.name,
+                email: data.email,
+                photo: photoURL,
+                status: 'active',
+                role: 'user',
+              };
+  
+              axiosPublic.post('/users', userInfo).then((res) => {
+                if (res.data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Create Account Successfully',
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate('/');
+                }
+              });
+            })
+            .catch((error) => {
+              console.error("Profile update failed", error);
+            });
+        })
+        .catch((error) => {
+          console.error("User creation failed", error);
+        });
+    }
   };
 
   // Google sign in with user
@@ -129,7 +143,7 @@ function Register() {
               placeholder="Enter Photo-Url"
               {...register("photo", { required: true })}
               name="photo"
-              type="url"
+              type="file"
             />
             {/* Error Messages */}
             {errors.photo && (

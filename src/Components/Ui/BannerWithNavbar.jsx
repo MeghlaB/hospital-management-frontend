@@ -13,7 +13,7 @@ function BannerWithNavbar() {
   useEffect(() => {
     if (user?.email) {
       // Fetch the role based on user email
-      fetch(`http://localhost:5000/${user?.email}`)
+      fetch(`https://hospital-server-peach.vercel.app/${user?.email}`)
         .then((res) => res.json())
         .then((data) => setRole(data?.role));
     }
