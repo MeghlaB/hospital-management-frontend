@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 function DoctorList() {
   const axiosPublic = UseAxiosPublic();
   const [selectedSpecialization, setselectedSpecialization] = useState(null);
-  const navigate = useNavigate();
+
 
   const {
     isLoading,
@@ -87,7 +87,7 @@ function DoctorList() {
                 <div
                   key={doctor._id}
                   className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
-                  onClick={()=>navigate(`/doctors/${doctor._id}`)}
+               
                 >
                   <figure className="h-56 overflow-hidden">
                     <img
@@ -109,11 +109,11 @@ function DoctorList() {
                     <p className="text-sm text-gray-500">
                       {doctor.specialization}
                     </p>
-                    {/* <Link to={"/doctor-appointment-booking"}>
+                    <Link to={`/doctors/${doctor._id}`}>
                       <button className="mt-3 w-full bg-[#00786F] text-white py-2 rounded-xl hover:bg-[#00786F] transition">
-                        Book Appointment
+                        Doctor-Details
                       </button>
-                    </Link> */}
+                    </Link>
                   </div>
                 </div>
               ))

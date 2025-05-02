@@ -4,20 +4,21 @@ import banner from "/src/assets/hospital-banner.jpg";
 import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
 
-
 function BannerWithNavbar() {
   const { user, logOut } = UseAuth();
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [role , setRole] = useState(null)
+  const [role, setRole] = useState('');
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/users/role/${user.email}`)
-        .then(res => res.json())
-        .then(data => setRole(data?.role));
+      // Fetch the role based on user email
+      fetch(`http://localhost:5000/${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => setRole(data?.role));
     }
   }, [user]);
+
   // handle logout
   const handleLogout = () => {
     Swal.fire({
@@ -96,10 +97,7 @@ function BannerWithNavbar() {
 
             {user ? (
               <div className="dropdown dropdown-end space-y-3">
-                <label
-                  tabIndex={0}
-                  className="btn btn-ghost btn-circle avatar"
-                >
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full border-2 border-teal-600">
                     <img
                       src={user?.photoURL || "/default-avatar.png"}
@@ -112,10 +110,17 @@ function BannerWithNavbar() {
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4"
                 >
                   <li>
-                    <Link to={role === "admin" ? "/dashboard" : "/dashboard/overview"}>Dashboard</Link>
+                    <Link to={role === "admin" ? "/dashboard" : "/dashboard/my-appoinments"}>
+                      Dashboard
+                    </Link>
                   </li>
                   <li>
-                    <button className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"  onClick={handleLogout}>Logout</button>
+                    <button
+                      className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>
