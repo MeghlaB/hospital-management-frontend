@@ -22,7 +22,7 @@ function DoctorDetails() {
     enabled: !!id,
   });
 
-  const dates = ["SAT 26", "SUN 27", "MON 28", "TUE 29", "WED 30", "THU 1", "FRI 2"];
+  const dates = ["THU 1", "FRI 2","SAT 3", "SUN 4", "MON 5", "TUE 6", "WED 7", ];
   const times = ["10:00 am", "10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm"];
 
   if (isLoading) {

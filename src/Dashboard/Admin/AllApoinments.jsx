@@ -52,7 +52,7 @@ function AppointmentList() {
 
   const handleStatusChange = async (appointmentId, newStatus) => {
     try {
-      const res = await axiosPublic.put(`/appointments/${appointmentId}`, {
+      const res = await axiosPublic.put(`/appointment/${appointmentId}`, {
         status: newStatus,
       });
       console.log("Status updated:", res.data);

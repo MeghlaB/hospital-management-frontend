@@ -38,9 +38,9 @@ const Appointment = () => {
       specialization: data.specialization,  // Add specialization field here
       status: "pending",
     };
-
+    console.log(bookingInfo)
     try {
-      const res = await axiosPublic.post("/appointments", bookingInfo);
+      const res = await axiosPublic.post("/appoinments", bookingInfo);
       console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
