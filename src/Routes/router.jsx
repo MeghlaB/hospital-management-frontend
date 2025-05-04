@@ -16,10 +16,10 @@ import DoctorDetails from "../Components/DoctorDetails/DoctorDetails";
 import UserManagement from "../Dashboard/Admin/UserManagement";
 import MyAppoinment from "../Dashboard/User/MyAppoinment";
 import QucikBooking from "../Dashboard/User/QucikBooking";
-import Notifications from "../Dashboard/User/UserProfile";
 import Overview from "../Dashboard/User/Overview";
 import AllApoinments from "../Dashboard/Admin/AllApoinments";
-import UserProfile from "../Dashboard/User/UserProfile";
+import UserProfile from "../Dashboard/UserProfile";
+import Edit from "../Dashboard/Edit";
 
 const router = createBrowserRouter([
   {
@@ -90,30 +90,36 @@ const router = createBrowserRouter([
         element: <AddDoctor />,
       },
       {
-        path:'user-management',
-        element:<UserManagement/>
-      },{
-        path:'all-appoinments',
-        element:<AllApoinments/>
-      }
-      ,
+        path: "user-management",
+        element: <UserManagement />,
+      },
+      {
+        path: "all-appoinments",
+        element: <AllApoinments />,
+      },
       // user dashboard
       {
-path:'overview',
-element:<Overview/>
+        path: "overview",
+        element: <Overview />,
       },
       {
-        path:'my-appoinments',
-        element:<MyAppoinment></MyAppoinment>
+        path: "my-appoinments",
+        element: <MyAppoinment></MyAppoinment>,
       },
       {
-        path:'quick-booking',
-        element:<QucikBooking/>
+        path: "quick-booking",
+        element: <QucikBooking />,
       },
       {
-        path:'user-profile',
-        element:<UserProfile/>
-      }
+        path: "user-profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "user-profile/update/:id",
+        element: <Edit></Edit>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/users/${params.id}`),
+      },
     ],
   },
 ]);
