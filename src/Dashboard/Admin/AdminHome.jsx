@@ -12,7 +12,7 @@ function AdminHome() {
     queryKey: ["doctors"],
     queryFn: async () => {
       const res = await axiosSequire.get("/doctors");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -22,7 +22,7 @@ function AdminHome() {
     queryKey:['appoinments'],
     queryFn:async ()=>{
       const res = await axiosSequire.get('/appoinments')
-      console.log(res.data)
+      // console.log(res.data)
       return res.data
     }
   })
@@ -31,7 +31,7 @@ function AdminHome() {
     queryKey:['users'],
     queryFn:async ()=>{
       const res = await axiosSequire.get('/users')
-      console.log(res.data)
+      // console.log(res.data)
       return res.data
     }
   })

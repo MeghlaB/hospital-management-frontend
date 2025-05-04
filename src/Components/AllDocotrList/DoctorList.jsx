@@ -41,7 +41,7 @@ function DoctorList() {
         (doctor) => doctor.specialization === selectedSpecialization
       )
     : doctors;
-  console.log(filteredDoctors);
+  // console.log(filteredDoctors);
 
   const specializations = [
     "Cardiologist",

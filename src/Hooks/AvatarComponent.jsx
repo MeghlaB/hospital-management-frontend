@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 export default function AvatarDropdown() {
     const{user} = UseAuth()
-    console.log(user)
+    // console.log(user)
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
   const items = ['Profile', 'Dashboard', 'Settings', 'Log Out'];

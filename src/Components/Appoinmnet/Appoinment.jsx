@@ -27,7 +27,7 @@ const Appointment = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     const bookingInfo = {
       ...data,
       email: user.email,
@@ -38,17 +38,17 @@ const Appointment = () => {
       specialization: data.specialization,  // Add specialization field here
       status: "pending",
     };
-    console.log(bookingInfo)
+    // console.log(bookingInfo)
     try {
       const res = await axiosPublic.post("/appoinments", bookingInfo);
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
           title: "Appointment Booked Successfully",
           icon: "success",
           draggable: true,
         });
-        console.log("Appointment successfully booked");
+        // console.log("Appointment successfully booked");
       }
     } catch (error) {
       console.log("Error submitting appointment:", error.message);

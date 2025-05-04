@@ -22,7 +22,7 @@ reset,
 
  
   const onSubmit =  async(data) => {
-    console.log("Doctor Data:", data);
+    // console.log("Doctor Data:", data);
      // ImageBB hosting
   const imageFile = { image: data.image[0] }; 
   const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -47,10 +47,10 @@ if(res.data.success){
     status:'availble',
     bio:data?.bio
   };
-  console.log(doctorinfo);
+  // console.log(doctorinfo);
 
   axiosPublic.post("/add-doctor", doctorinfo).then((res) => {
-    console.log(res.data);
+    // console.log(res.data);
     reset()
     if (res.data.insertedId) {
       Swal.fire({

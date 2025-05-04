@@ -20,6 +20,7 @@ import Overview from "../Dashboard/User/Overview";
 import AllApoinments from "../Dashboard/Admin/AllApoinments";
 import UserProfile from "../Dashboard/UserProfile";
 import Edit from "../Dashboard/Edit";
+import AppoinmentDetails from "../Dashboard/Admin/AppoinmentDetails";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,20 @@ const router = createBrowserRouter([
         path: "all-appoinments",
         element: <AllApoinments />,
       },
+      {
+        path:'all-appoinments/appointments/:id',
+        
+        element:<AppoinmentDetails/>,
+        loader: ({ params }) => fetch(`http://localhost:5000/appoinments/${params.id}`)
+      },
+
+
+
+
+
+
+
+
       // user dashboard
       {
         path: "overview",
@@ -120,6 +135,7 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/users/${params.id}`),
       },
+
     ],
   },
 ]);

@@ -55,7 +55,7 @@ function AppointmentList() {
       const res = await axiosPublic.put(`/appointment/${appointmentId}`, {
         status: newStatus,
       });
-      console.log("Status updated:", res.data);
+      // console.log("Status updated:", res.data);
       queryClient.invalidateQueries(["appointments"]);
     } catch (error) {
       console.error("Error updating status:", error);
@@ -132,7 +132,7 @@ function AppointmentList() {
                       </select>
                     </td>
                     <td className="border px-4 py-2 text-center">
-                      <Link to={`/appointments/${appointment._id}`}>
+                      <Link to={`appointments/${appointment._id}`}>
                         <button className="w-full bg-[#00786F] text-white py-2 rounded-xl hover:bg-[#005f57] transition">
                           View Details
                         </button>

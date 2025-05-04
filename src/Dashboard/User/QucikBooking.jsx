@@ -44,7 +44,7 @@ const Appoinment = () => {
 
     try {
       const res = await axiosPublic.post("/appoinments", bookingInfo);
-      console.log(res.data)
+      // console.log(res.data)
       reset()
       if (res.data.insertedId) {
         Swal.fire({

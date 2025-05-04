@@ -11,7 +11,7 @@ function MainLayout() {
     const location = useLocation()
     const isHome = location.pathname === '/'
     const noheaderFooter = ['/login','/register'].some(path=>location.pathname.includes(path))
-    console.log(isHome ,noheaderFooter)
+    // console.log(isHome ,noheaderFooter)
   return (
     <div>
 
