@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import banner from "/src/assets/hospital-banner.jpg";
 import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
+import UseAdmin from "../../Hooks/UseAdmin";
 
 function BannerWithNavbar() {
   const { user, logOut } = UseAuth();
+  const [isAdmin] = UseAdmin()
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [role, setRole] = useState('');
+ 
 
-  useEffect(() => {
-    if (user?.email) {
-      // Fetch the role based on user email
-      fetch(`https://hospital-server-peach.vercel.app/${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => setRole(data?.role));
+  // Function to determine dashboard link based on user role
+  const getDashboardLink = useCallback(() => {
+    if (isAdmin) {
+      return '/dashboard';
     }
-  }, [user]);
+  
+    return '/dashboard/my-appoinments';
+  }, [isAdmin]);
+
+
 
   // handle logout
   const handleLogout = () => {
@@ -110,7 +114,7 @@ function BannerWithNavbar() {
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4"
                 >
                   <li>
-                    <Link to={role === "admin" ? "/dashboard" : "/dashboard/my-appoinments"}>
+                    <Link to={getDashboardLink()}>
                       Dashboard
                     </Link>
                   </li>
