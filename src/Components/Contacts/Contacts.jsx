@@ -6,7 +6,7 @@ const Contacts = () => {
       <div className="max-w-6xl mx-auto space-y-16 my-18">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-700 mb-3"> Get in Touch</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-teal-700 mb-3"> Get in Touch</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We’re always here to help you. Reach out to us for any query, emergency, or just to say hello.
           </p>
@@ -16,15 +16,15 @@ const Contacts = () => {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6">
             <div>
-              <h4 className="text-xl font-semibold text-blue-600">📍 Hospital Location</h4>
+              <h4 className="text-xl font-semibold text-teal-600">📍 Hospital Location</h4>
               <p>123 Health Road, Dhaka, Bangladesh</p>
             </div>
             <div>
-              <h4 className="text-xl font-semibold text-blue-600">📞 Phone</h4>
+              <h4 className="text-xl font-semibold text-teal-600">📞 Phone</h4>
               <p>+880 1234 567 890</p>
             </div>
             <div>
-              <h4 className="text-xl font-semibold text-blue-600">✉️ Email</h4>
+              <h4 className="text-xl font-semibold text-teal-600">✉️ Email</h4>
               <p>contact@sevahospital.com</p>
             </div>
           </div>
@@ -44,7 +44,7 @@ const Contacts = () => {
 
         {/* Contact Form */}
         <div className="bg-white/70 backdrop-blur-lg p-10 rounded-3xl shadow-xl border-t-4 border-teal-600">
-          <h3 className="text-2xl font-bold text-blue-700 mb-6">📝 Send Us a Message</h3>
+          <h3 className="text-2xl font-bold text-teal-700 mb-6">📝 Send Us a Message</h3>
           <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
               type="text"

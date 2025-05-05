@@ -6,8 +6,8 @@ const About = () => {
     <div className="max-w-7xl mx-auto px-6 py-20 space-y-20 text-gray-800 font-sans">
       
       {/* Page Header */}
-      <div className="text-center">
-        <h1 className="text-5xl font-extrabold text-blue-700 mb-3"> About Seva Hospital</h1>
+      <div className="text-center mt-10">
+        <h1 className="text-5xl font-extrabold text-teal-700 mb-3"> About Seva Hospital</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           A journey of care, compassion, and commitment — built for the people, by the people.
         </p>
@@ -15,9 +15,9 @@ const About = () => {
 
       {/* History & Vision */}
       <section className="flex flex-col md:flex-row items-start gap-10 bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl shadow-lg">
-        <FaHospital className="text-6xl text-blue-600 shrink-0" />
+        <FaHospital className="text-6xl text-teal-600 shrink-0" />
         <div>
-          <h2 className="text-3xl font-bold text-blue-700 mb-4">🏥 Our Story & Vision</h2>
+          <h2 className="text-3xl font-bold text-teal-700 mb-4">🏥 Our Story & Vision</h2>
           <p className="text-gray-700 leading-relaxed text-lg">
             Founded in <strong>2005</strong>, Seva Hospital began with a bold dream — to make quality healthcare a right, not a privilege.
             Over the years, we’ve touched thousands of lives with a single promise: <em>“You matter, your health matters.”</em>
@@ -34,7 +34,7 @@ const About = () => {
       <section className="flex flex-col md:flex-row items-start gap-10 bg-white border-l-8 border-blue-600 p-8 rounded-3xl shadow-md">
         <FaHeartbeat className="text-6xl text-red-500 shrink-0" />
         <div>
-          <h2 className="text-3xl font-bold text-blue-700 mb-4">💉 What We Offer</h2>
+          <h2 className="text-3xl font-bold text-teal-700 mb-4">💉 What We Offer</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700 text-lg">
             <li>✅ 24/7 Emergency Services</li>
             <li>✅ Specialist Doctors & Surgeons</li>
@@ -50,9 +50,9 @@ const About = () => {
 
       {/* Management Team */}
       <section className="flex flex-col md:flex-row items-start gap-10 bg-gradient-to-br from-white to-blue-50 p-8 rounded-3xl shadow-lg">
-        <FaUsers className="text-6xl text-blue-600 shrink-0" />
+        <FaUsers className="text-6xl text-teal-600 shrink-0" />
         <div>
-          <h2 className="text-3xl font-bold text-blue-700 mb-4">👨‍⚕️ Meet the Team</h2>
+          <h2 className="text-3xl font-bold text-teal-700 mb-4">👨‍⚕️ Meet the Team</h2>
           <div className="space-y-5 text-lg text-gray-700">
             <div>
               <strong>🧑‍⚕️ Dr. Md. Habibur Rahman</strong><br />
@@ -75,7 +75,7 @@ const About = () => {
 
       {/* Closing Note */}
       <div className="text-center max-w-2xl mx-auto mt-10">
-        <h3 className="text-2xl font-semibold text-blue-700 mb-2">Your Health, Our Mission 💙</h3>
+        <h3 className="text-2xl font-semibold text-teal-700 mb-2">Your Health, Our Mission 💙</h3>
         <p className="text-gray-600">
           At Seva Hospital, you're not just a patient — you're family. Thank you for trusting us with your care.
         </p>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns"; // Install if needed: npm install date-fns
 
 function DoctorDetails() {
   const { id } = useParams();
@@ -22,14 +23,38 @@ function DoctorDetails() {
     enabled: !!id,
   });
 
-  const dates = ["THU 1", "FRI 2","SAT 3", "SUN 4", "MON 5", "TUE 6", "WED 7", ];
-  const times = ["10:00 am", "10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm"];
+  // 👉 Generate 7 Days Starting from Today
+  const generateNext7Days = () => {
+    const days = [];
+    const today = new Date();
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const formatted = format(date, "EEE d"); // Example: "Mon 5"
+      days.push(formatted.toUpperCase());
+    }
+
+    return days;
+  };
+
+  const dates = generateNext7Days();
+
+  // 👉 Use doctor's availableTimes or fallback to defaults
+  const times = doctor?.availableTimes || [
+    "10:00 am",
+    "10:30 am",
+    "11:00 am",
+    "11:30 am",
+    "12:00 pm",
+    "12:30 pm",
+    "01:00 pm",
+    "01:30 pm",
+  ];
 
   if (isLoading) {
     return (
-      <p className="text-center mt-10 text-gray-500">
-        Loading doctor details...
-      </p>
+      <p className="text-center mt-10 text-gray-500">Loading doctor details...</p>
     );
   }
 
@@ -52,7 +77,7 @@ function DoctorDetails() {
         <img
           src={doctor?.image}
           alt={doctor?.name}
-          className="w-64 h-80 object-cover rounded-2xl bg-blue-500 p-2"
+          className="w-64 h-80 object-cover rounded-2xl border-4 border-blue-100 shadow-lg transition-transform duration-300 hover:scale-105"
         />
       </div>
 
@@ -60,16 +85,19 @@ function DoctorDetails() {
       <div className="w-full md:w-2/3 space-y-6">
         <div className="border rounded-xl p-6 shadow-md">
           <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
-            {doctor?.name}
-            <span className="text-blue-500">✔️</span>
+            👨‍⚕️ {doctor?.name}
           </h2>
-          <p className="text-gray-600 mt-2">{doctor?.degree} - {doctor?.specialization}</p>
-          <p className="mt-4 text-gray-700">
-            {doctor?.bio }
+          <p className="text-sm text-gray-400 italic">Your trusted healthcare partner</p>
+          <p className="text-gray-600 mt-2">
+            {doctor?.degree} - {doctor?.specialization}
           </p>
+          <p className="mt-4 text-gray-700">{doctor?.bio}</p>
 
           <p className="mt-4 text-lg font-semibold text-gray-700">
-            Appointment fee: <span className="text-black">${doctor?.appoinmetfee}</span>
+            Appointment Fee:{" "}
+            <span className="text-xl font-bold text-green-600">
+              ${doctor?.appoinmetfee}
+            </span>
           </p>
         </div>
 
@@ -83,8 +111,10 @@ function DoctorDetails() {
               <button
                 key={index}
                 onClick={() => setSelectedDate(date)}
-                className={`px-4 py-3 rounded-full border ${
-                  selectedDate === date ? "bg-blue-600 text-white" : "text-gray-700"
+                className={`px-4 py-3 rounded-full border transition-all duration-300 ${
+                  selectedDate === date
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-100 hover:bg-blue-50 text-gray-700"
                 }`}
               >
                 {date}
@@ -98,8 +128,10 @@ function DoctorDetails() {
               <button
                 key={index}
                 onClick={() => setSelectedTime(time)}
-                className={`px-4 py-2 rounded-full border ${
-                  selectedTime === time ? "bg-blue-600 text-white" : "text-gray-700"
+                className={`px-4 py-2 rounded-full border transition-all duration-300 ${
+                  selectedTime === time
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-100 hover:bg-blue-50 text-gray-700"
                 }`}
               >
                 {time}
@@ -109,22 +141,27 @@ function DoctorDetails() {
 
           {/* Book Appointment Button */}
           <div className="mt-8">
-           <Link to={'/doctor-appointment-booking'}
-           state={{
-            doctorId:id,
-            doctorName:doctor?.name,
-            fee:doctor?.fee,
-            selectedDate,
-            selectedTime
-           }}
-           
-           >
-           <button
-              className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition"
+            <Link
+              to={"/doctor-appointment-booking"}
+              state={{
+                doctorId: id,
+                doctorName: doctor?.name,
+                fee: doctor?.appoinmetfee,
+                selectedDate,
+                selectedTime,
+              }}
             >
-              Book an appointment
-            </button>
-           </Link>
+              <button
+                disabled={!selectedDate || !selectedTime}
+                className={`w-full md:w-auto font-semibold px-8 py-3 rounded-full transition ${
+                  selectedDate && selectedTime
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+              >
+                Book an appointment
+              </button>
+            </Link>
           </div>
         </div>
       </div>
