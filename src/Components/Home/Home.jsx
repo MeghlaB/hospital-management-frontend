@@ -1,17 +1,27 @@
-import React from 'react'
+import React from "react";
 
-import Appointment from '../Ui/Home-journal/createAppoinment'
-import BannerWithNavbar from '../Ui/BannerWithNavbar'
-import Testimonials from '../Testimonials/Testimonilas'
-
+import Appointment from "../Ui/Home-journal/createAppoinment";
+import BannerWithNavbar from "../Ui/BannerWithNavbar";
+import Testimonials from "../Testimonials/Testimonilas";
+import { Banner } from "../Header/Banner";
+import UseAuth from "../../Hooks/UseAuth";
 function Home() {
+  const { isloading ,user} = UseAuth();
+
   return (
     <div>
-      {/* <BannerWithNavbar/> */}
-      <Appointment/>
-      <Testimonials/>
+      {isloading  || user? (
+        <>
+          <Banner />
+
+          <Appointment />
+          <Testimonials />
+        </>
+      ) : (
+        <></>
+      )}
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

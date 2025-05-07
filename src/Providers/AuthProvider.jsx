@@ -19,7 +19,7 @@ const provider = new GoogleAuthProvider();
 
 function AuthProvider({ children }) {
   const axiosPublic = UseAxiosPublic()
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
   const [isloading, setIsLoading] = useState(true);
 
   // CreateUser
@@ -58,13 +58,16 @@ function AuthProvider({ children }) {
       if(currentUser){
         // get token 
         const userInfo = {email: currentUser?.email}
+        console.log(userInfo)
         axiosPublic.post('/jwt',userInfo)
         .then(res =>{
           // console.log(res.data)
           if(res.data.token){
-            setIsLoading(false);
+            
             localStorage.setItem('access-token',res.data.token)
+          
           }
+          setIsLoading(false);
         })
 
       }
@@ -73,13 +76,43 @@ function AuthProvider({ children }) {
         setIsLoading(false);
         localStorage.removeItem('access-token')
       }
-      // console.log("Cureent_User", currentUser);
-      // setIsLoading(false);
+      console.log("Cureent_User", currentUser);
+      setIsLoading(false);
     });
-    return () => {
-      return Unsubscribe();
-    };
+    return () => Unsubscribe();
+    
   }, [axiosPublic]);
+
+  // useEffect(() => {
+
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setIsLoading(false)
+  //     if (currentUser) {
+
+  //       setUser(currentUser);
+  //       // get token and store client
+  //       const userInfo = { email: currentUser.email }
+  //       axiosPublic.post('/jwt', userInfo)
+  //         .then(res => {
+  //           // console.log(res.data)
+  //           if (res.data.token) {
+  //             setIsLoading(false)
+  //             localStorage.setItem('access-token', res.data.token)
+  //           }
+  //         })
+  //     }
+  //     else {
+  //       // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+  //       setIsLoading(false)
+  //       localStorage.removeItem('access-token');
+  //     }
+  //     // console.log('Current User ==>', currentUser);
+  //     setIsLoading(false)
+  //   });
+
+  //   // Cleanup function for onAuthStateChanged
+  //   return () => unsubscribe();
+  // }, [axiosPublic]);
   const authInfo = {
     user,
     isloading,

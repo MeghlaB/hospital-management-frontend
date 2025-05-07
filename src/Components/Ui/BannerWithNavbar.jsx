@@ -1,27 +1,26 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import banner from "/src/assets/hospital-banner.jpg";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
 import UseAdmin from "../../Hooks/UseAdmin";
 
+// Image imports
+import banner1 from "/src/assets/Images/hospital1.jpg";
+import banner2 from "/src/assets/Images/hospital2.jpeg";
+import banner3 from "/src/assets/Images/hospital3.jpeg";
+
 function BannerWithNavbar() {
   const { user, logOut } = UseAuth();
-  const [isAdmin] = UseAdmin()
+  const [isAdmin] = UseAdmin();
 
   const [isScrolled, setIsScrolled] = useState(false);
- 
 
-  // Function to determine dashboard link based on user role
+  // Dashboard link based on role
   const getDashboardLink = useCallback(() => {
-    if (isAdmin) {
-      return '/dashboard';
-    }
-  
-    return '/dashboard/my-appoinments';
+    return isAdmin ? "/dashboard" : "/dashboard/my-appoinments";
   }, [isAdmin]);
-
-
 
   // handle logout
   const handleLogout = () => {
@@ -68,55 +67,22 @@ function BannerWithNavbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="text-2xl font-bold text-teal-600">I-Health</div>
           <div className="space-x-6 text-gray-800 font-medium flex items-center">
-            <Link
-              to="/"
-              className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
-            >
-              Contact
-            </Link>
-            <Link
-              to="/doctor-list"
-              className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
-            >
-              Doctor List
-            </Link>
-            <Link
-              to="/doctor-appointment-booking"
-              className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
-            >
-              Appointment
-            </Link>
+            <Link to="/" className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300">Home</Link>
+            <Link to="/about" className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300">About</Link>
+            <Link to="/contact" className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300">Contact</Link>
+            <Link to="/doctor-list" className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300">Doctor List</Link>
+            <Link to="/doctor-appointment-booking" className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300">Appointment</Link>
 
             {user ? (
               <div className="dropdown dropdown-end space-y-3">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full border-2 border-teal-600">
-                    <img
-                      src={user?.photoURL || "/default-avatar.png"}
-                      alt="User Avatar"
-                    />
+                    <img src={user?.photoURL || "/default-avatar.png"} alt="User Avatar" />
                   </div>
                 </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4"
-                >
+                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-4 shadow border-accent space-y-4">
                   <li>
-                    <Link to={getDashboardLink()}>
-                      Dashboard
-                    </Link>
+                    <Link to={getDashboardLink()}>Dashboard</Link>
                   </li>
                   <li>
                     <button
@@ -148,7 +114,7 @@ function BannerWithNavbar() {
         </div>
       </div>
 
-      {/* Banner Section */}
+      {/* Banner Section with Slider */}
       <div className="bg-gradient-to-r from-orange-300 to-orange-100 min-h-screen flex items-center px-6 md:px-12 pt-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           {/* Text Content */}
@@ -166,15 +132,26 @@ function BannerWithNavbar() {
             </button>
           </div>
 
-          {/* Image */}
+          {/* Slider */}
           <div>
-            <img
-              src={banner}
-              alt="Dashboard preview"
+            <Carousel
+              autoPlay
+              infiniteLoop
+              showThumbs={false}
+              showStatus={false}
+              interval={4000}
               className="rounded-lg shadow-xl"
-              width={750}
-              height={500}
-            />
+            >
+              <div>
+                <img src={banner1} alt="Banner 1" />
+              </div>
+              <div>
+                <img src={banner2} alt="Banner 2" />
+              </div>
+              <div>
+                <img src={banner3} alt="Banner 3" />
+              </div>
+            </Carousel>
           </div>
         </div>
       </div>

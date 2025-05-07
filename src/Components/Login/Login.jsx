@@ -19,6 +19,7 @@ function Login() {
         signIn(email,password)
         .then((userCredential)=>{
             const user = userCredential.user
+            console.log(user)
             Swal.fire({
                 position: "top-center",
                 icon: "success",

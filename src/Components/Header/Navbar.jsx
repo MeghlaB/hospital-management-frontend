@@ -32,7 +32,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-white shadow-md">
+    <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-white shadow-md mb-9">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
         <div className="text-2xl font-bold text-teal-600">I-Health</div>
 
