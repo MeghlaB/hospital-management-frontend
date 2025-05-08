@@ -4,7 +4,7 @@ import { Outlet, useLocation} from "react-router-dom";
 import BannerWithNavbar from "../Components/Ui/BannerWithNavbar";
 import Footer from "../Components/Footer/Footer";
 import Navbar from "../Components/Ui/Navbar";
-import { Banner } from "../Components/Header/Banner";
+
 
 function MainLayout() {
   // const location = useLocation();

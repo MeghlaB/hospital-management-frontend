@@ -6,20 +6,12 @@ import Testimonials from "../Testimonials/Testimonilas";
 import { Banner } from "../Header/Banner";
 import UseAuth from "../../Hooks/UseAuth";
 function Home() {
-  const { isloading ,user} = UseAuth();
-
   return (
     <div>
-      {isloading  || user? (
-        <>
           <Banner />
-
           <Appointment />
           <Testimonials />
-        </>
-      ) : (
-        <></>
-      )}
+
     </div>
   );
 }

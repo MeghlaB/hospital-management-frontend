@@ -123,7 +123,15 @@ function AuthProvider({ children }) {
     GoogleLogin
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>
+    {isloading ? (
+      <div className="fixed inset-0 flex justify-center items-center bg-accent bg-opacity-50">
+        <span className="loading loading-dots loading-lg"></span>
+      </div>
+    ) : (
+      children
+    )}
+  </AuthContext.Provider>
   );
 }
 
