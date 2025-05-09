@@ -52,36 +52,32 @@ function AuthProvider({ children }) {
   }
 
   // onAuthStateChanged
-  useEffect(() => {
-    const Unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
       setUser(currentUser);
-      if(currentUser){
-        // get token 
-        const userInfo = {email: currentUser?.email}
-        console.log(userInfo)
-        axiosPublic.post('/jwt',userInfo)
-        .then(res =>{
-          // console.log(res.data)
-          if(res.data.token){
-            
-            localStorage.setItem('access-token',res.data.token)
-          
-          }
-          setIsLoading(false);
-        })
 
-      }
-      else{
-        // get remove token 
-        setIsLoading(false);
-        localStorage.removeItem('access-token')
-      }
-      console.log("Cureent_User", currentUser);
+      const userInfo = { email: currentUser.email };
+      axiosPublic.post("/jwt", userInfo)
+        .then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+          setIsLoading(false); // ✅ এখানে রাখো
+        })
+        .catch(() => {
+          setIsLoading(false); // 🛑 error হলেও loading বন্ধ হওয়া দরকার
+        });
+    } else {
+      setUser(null);
+      localStorage.removeItem("access-token");
       setIsLoading(false);
-    });
-    return () => Unsubscribe();
-    
-  }, [axiosPublic]);
+    }
+  });
+
+  return () => unsubscribe();
+}, [axiosPublic]);
+
 
   // useEffect(() => {
 
