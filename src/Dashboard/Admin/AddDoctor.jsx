@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const image_hosting_key = import.meta.env.VITE_IMAGEHOSTING;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -10,7 +11,12 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddDoctorForm = () => {
   const axiosPublic = UseAxiosPublic();
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
     try {
@@ -19,15 +25,15 @@ const AddDoctorForm = () => {
       formData.append("image", data.image[0]);
 
       // Image upload request
-      const res = await axiosPublic.post(image_hosting_api, formData, {
+      const res = await axios.post(image_hosting_api, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
+      console.log(res);
       if (res.data.success) {
         const photoURL = res.data.data.display_url;
-        
+
         // Doctor information object
         const doctorinfo = {
           name: data?.name,
@@ -40,11 +46,15 @@ const AddDoctorForm = () => {
           image: photoURL,
           status: "available",
           bio: data?.bio,
+          location:data?.location
         };
-        console.log(doctorinfo)
+        console.log(doctorinfo);
 
         // Post doctor information to the backend
-        const doctorResponse = await axiosPublic.post("/add-doctor", doctorinfo);
+        const doctorResponse = await axiosPublic.post(
+          "/add-doctor",
+          doctorinfo
+        );
 
         if (doctorResponse.data.insertedId) {
           reset();
@@ -68,8 +78,13 @@ const AddDoctorForm = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 mt-4 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Add Doctor</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-2 gap-3">
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
+        Add Doctor
+      </h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4 grid grid-cols-2 gap-3"
+      >
         {/* Full Name */}
         <div>
           <label className="block font-semibold mb-1">Full Name</label>
@@ -78,7 +93,9 @@ const AddDoctorForm = () => {
             className="input input-bordered w-full"
             placeholder="Dr. John Doe"
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
         </div>
 
         {/* Email */}
@@ -90,7 +107,9 @@ const AddDoctorForm = () => {
             className="input input-bordered w-full"
             placeholder="doctor@example.com"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
 
         {/* Phone */}
@@ -102,14 +121,18 @@ const AddDoctorForm = () => {
             className="input input-bordered w-full"
             placeholder="01XXXXXXXXX"
           />
-          {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+          )}
         </div>
 
         {/* Specialization */}
         <div>
           <label className="block font-semibold mb-1">Specialization</label>
           <select
-            {...register("specialization", { required: "Specialization is required" })}
+            {...register("specialization", {
+              required: "Specialization is required",
+            })}
             className="select select-bordered w-full"
           >
             <option value="">-- Select Specialization --</option>
@@ -122,7 +145,11 @@ const AddDoctorForm = () => {
             <option value="Psychiatrist">Psychiatrist</option>
             <option value="General Physician">General Physician</option>
           </select>
-          {errors.specialization && <p className="text-red-500 text-sm">{errors.specialization.message}</p>}
+          {errors.specialization && (
+            <p className="text-red-500 text-sm">
+              {errors.specialization.message}
+            </p>
+          )}
         </div>
 
         {/* Gender */}
@@ -137,7 +164,22 @@ const AddDoctorForm = () => {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
-          {errors.gender && <p className="text-red-500 text-sm">{errors.gender.message}</p>}
+          {errors.gender && (
+            <p className="text-red-500 text-sm">{errors.gender.message}</p>
+          )}
+        </div>
+        {/* Location */}
+        <div>
+          <label className="block font-semibold mb-1">Location</label>
+          <input
+            type="text"
+            {...register("location", { required: "Location is required" })}
+            className="input input-bordered w-full"
+            placeholder="location here..."
+          />
+          {errors.location && (
+            <p className="text-red-500 text-sm">{errors.location.message}</p>
+          )}
         </div>
 
         {/* Profile Image */}
@@ -148,7 +190,9 @@ const AddDoctorForm = () => {
             {...register("image", { required: "Profile image is required" })}
             className="file-input file-input-bordered w-full"
           />
-          {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+          {errors.image && (
+            <p className="text-red-500 text-sm">{errors.image.message}</p>
+          )}
         </div>
 
         {/* Available Time */}
@@ -160,7 +204,9 @@ const AddDoctorForm = () => {
             className="input input-bordered w-full"
             placeholder="e.g., 10:00 AM - 1:00 PM"
           />
-          {errors.time && <p className="text-red-500 text-sm">{errors.time.message}</p>}
+          {errors.time && (
+            <p className="text-red-500 text-sm">{errors.time.message}</p>
+          )}
         </div>
 
         {/* Fee */}
@@ -171,7 +217,9 @@ const AddDoctorForm = () => {
             className="input input-bordered w-full"
             placeholder="Doctor appointment fee..."
           />
-          {errors.fee && <p className="text-red-500 text-sm">{errors.fee.message}</p>}
+          {errors.fee && (
+            <p className="text-red-500 text-sm">{errors.fee.message}</p>
+          )}
         </div>
 
         {/* Short Bio */}
@@ -183,11 +231,15 @@ const AddDoctorForm = () => {
             placeholder="Write a short bio about the doctor..."
             rows={4}
           />
-          {errors.bio && <p className="text-red-500 text-sm">{errors.bio.message}</p>}
+          {errors.bio && (
+            <p className="text-red-500 text-sm">{errors.bio.message}</p>
+          )}
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="btn btn-primary w-full mt-4">Add Doctor</button>
+        <button type="submit" className="btn btn-primary w-full mt-4">
+          Add Doctor
+        </button>
       </form>
     </div>
   );

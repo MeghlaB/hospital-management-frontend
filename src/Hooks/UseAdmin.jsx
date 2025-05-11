@@ -10,13 +10,13 @@ function UseAdmin() {
     queryKey: [user?.email, 'isAdmin'],
     enabled: !loading && !!user?.email, 
     queryFn: async () => {
-      const res = await axiosSequire.get(`/users/admin/${user.email}`);
+      const res = await axiosSequire.get(`/users/admin/${user?.email}`);
       console.log(res.data);
       return res?.data?.admin;
     },
   });
 
-  return [isAdmin];
+  return [isAdmin,loading];
 }
 
 export default UseAdmin;
