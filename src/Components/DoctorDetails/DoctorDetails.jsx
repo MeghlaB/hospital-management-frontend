@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns"; // Install if needed: npm install date-fns
+import { format } from "date-fns";
 
 function DoctorDetails() {
   const { id } = useParams();
@@ -23,7 +23,7 @@ function DoctorDetails() {
     enabled: !!id,
   });
 
-  // 👉 Generate 7 Days Starting from Today
+
   const generateNext7Days = () => {
     const days = [];
     const today = new Date();

@@ -102,7 +102,7 @@ const router = createBrowserRouter([
         path:'all-appoinments/appointments/:id',
         
         element:<AppoinmentDetails/>,
-        loader: ({ params }) => fetch(`http://localhost:5000/appoinments/${params.id}`)
+        loader: ({ params }) => fetch(`https://hospital-server-peach.vercel.app/${params.id}`)
       },
 
 

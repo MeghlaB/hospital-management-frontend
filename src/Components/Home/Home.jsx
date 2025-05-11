@@ -14,8 +14,8 @@ function Home() {
           <Banner />
           <DoctorSearchSection/>
           <ChairmanMessage/>
-          <Appointment />
-          <Testimonials />
+          {/* <Appointment />
+          <Testimonials /> */}
 
     </div>
   );

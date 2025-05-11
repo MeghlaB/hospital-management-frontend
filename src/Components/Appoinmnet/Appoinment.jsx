@@ -35,7 +35,7 @@ const Appointment = () => {
       time: selectedTime,
       doctorId: doctor?._id,
       doctorName: doctor?.name,
-      specialization: data.specialization,  // Add specialization field here
+      specialization: data.specialization,  
       status: "pending",
     };
     // console.log(bookingInfo)
