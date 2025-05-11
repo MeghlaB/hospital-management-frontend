@@ -59,6 +59,7 @@ const router = createBrowserRouter([
           </Privetroutes>
         ),
       },
+    
       {
         path: "/login",
         element: <Login />,
