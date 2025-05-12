@@ -8,12 +8,14 @@ import UseAuth from "../../Hooks/UseAuth";
 import Search from "../Searches/Search";
 import DoctorSearchSection from "../Searches/Search";
 import ChairmanMessage from "../Message/Message";
+import FeaturedDoctors from "../FeaturedDoctors/FeaturedDoctors";
 function Home() {
   return (
     <div>
           <Banner />
           <DoctorSearchSection/>
           <ChairmanMessage/>
+          <FeaturedDoctors/>
           {/* <Appointment />
           <Testimonials /> */}
 
