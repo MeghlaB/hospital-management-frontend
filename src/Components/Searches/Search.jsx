@@ -15,7 +15,7 @@ export default function DoctorSearchSection() {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:5000/doctor-search", {
+      const res = await axios.get("https://hospital-server-peach.vercel.app/doctor-search", {
         params: {
           location,
           search: searchText,

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,9 +5,12 @@ const FeaturedDoctors = () => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/doctors") 
+    fetch("https://hospital-server-peach.vercel.app/doctors")
       .then((res) => res.json())
-      .then((data) => setDoctors(data));
+      .then((data) => {
+        console.log(data);
+        setDoctors(data);
+      });
   }, []);
 
   return (
@@ -32,13 +34,11 @@ const FeaturedDoctors = () => {
               <h3 className="mt-4 text-xl font-semibold text-gray-800">
                 {doctor.name}
               </h3>
-              <p className="text-blue-600 font-medium">
-                {doctor.specialty}
-              </p>
-              <Link to={'/doctor-appointment-booking'}>
+              <p className="text-blue-600 font-medium">{doctor.specialty}</p>
+              <Link to={`/doctor-appointment-booking/${doctor._id}`}>
                 <button className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition">
-                Book Now
-              </button>
+                  Book Now
+                </button>
               </Link>
             </div>
           ))}

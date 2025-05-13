@@ -134,7 +134,7 @@ const router = createBrowserRouter([
         path: "user-profile/update/:id",
         element: <Edit></Edit>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/users/${params.id}`),
+          fetch(`https://hospital-server-peach.vercel.app/users/${params.id}`),
       },
 
     ],
