@@ -56,9 +56,9 @@ const Appointment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br mt-15 from-white to-blue-50 py-16 px-4 md:px-10 text-gray-800 font-[Inter]">
+    <div className="min-h-screen bg-gradient-to-br  md:mt-15 from-white to-blue-50 py-16 px-4 md:px-10 text-gray-800 font-[Inter]">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-teal-700 mb-10">
+        <h2 className="text-xl md:text-4xl font-bold text-center text-teal-700 mb-10">
           📅 Book an Appointment
         </h2>
 

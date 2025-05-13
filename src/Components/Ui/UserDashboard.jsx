@@ -1,31 +1,26 @@
-import { BookIcon, Home, LayoutDashboard, Bell, CalendarCheck2, Timer } from "lucide-react";
+import {
+  BookIcon,
+  Home,
+  CalendarCheck2,
+} from "lucide-react";
 import React from "react";
 import { ImProfile } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 function UserDashboard() {
   return (
-    <aside className="h-screen w-[250px] bg-gray-800 text-white px-4 py-6 hidden md:flex flex-col justify-between fixed top-0 left-0 z-40">
-      {/* Header */}
+    <aside className="h-screen w-full bg-gray-800 text-white px-4 py-6 flex flex-col justify-between">
+      {/* Top section */}
       <div>
-        <div className="text-2xl font-bold mb-10">UserDashboard</div>
+        <div className="text-2xl font-bold mb-10">User Dashboard</div>
 
-        {/* Dashboard Links */}
         <nav className="space-y-4">
-          <Link
-            to="/dashboard/overview"
-            className="flex items-center gap-3 hover:text-gray-300"
-          >
-            <LayoutDashboard size={20} />
-            Overview
-          </Link>
-
           <Link
             to="/dashboard/my-appoinments"
             className="flex items-center gap-3 hover:text-gray-300"
           >
             <BookIcon size={20} />
-            My-Appoinments
+            My Appointments
           </Link>
 
           <Link
@@ -41,19 +36,19 @@ function UserDashboard() {
             className="flex items-center gap-3 hover:text-gray-300"
           >
             <ImProfile size={20} />
-          User-Profile
+            User Profile
           </Link>
         </nav>
       </div>
 
-      {/* Home Link at Bottom */}
-      <div>
+      {/* Bottom Home link */}
+      <div className="pt-10">
         <Link
           to="/"
           className="flex items-center gap-3 hover:text-gray-300"
         >
           <Home size={20} />
-      Home
+          Home
         </Link>
       </div>
     </aside>

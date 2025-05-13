@@ -1,32 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserDashboard from '../Components/Ui/UserDashboard';
 import AdminDashboard from '../Components/Ui/AdminDashboard';
 import { Outlet } from 'react-router-dom';
 import UseAdmin from '../Hooks/UseAdmin';
+import { ImCross, ImMenu } from 'react-icons/im';
 
 export default function Dashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isAdmin] = UseAdmin()
     // console.log(isAdmin)
+
+
+     const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
-    <div>
-      <div>
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="w-[250px] fixed h-full bg-gray-100">
-        {isAdmin ? <AdminDashboard/>:<UserDashboard/>}
-          {/* <SellerSidebar /> */}
+    <div className={`flex h-screen `}>
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 bg-gray-800 text-white left-0 z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } transition-transform duration-300 w-80 min-h-screen p-4 `}
+      >
+        {/* Close Button */}
+        <button
+          onClick={toggleSidebar}
+          className={`btn bg-red-950 text-white btn-sm absolute top-2 right-4`}
+        >
+          <ImCross />
+        </button>
+
+        {/* Sidebar Content */}
+          {isAdmin ? <AdminDashboard/>:<UserDashboard/>}
+      </div>
+
+      {/* Main Content */}
+      <div className={`flex-1 `}>
+        {/* Drawer Toggle Button */}
+        <div className="p-4">
+          <button
+            onClick={toggleSidebar}
+            className="btn bg-red-950 text-white drawer-button"
+          >
+            <ImMenu />
+          </button>
         </div>
 
-        {/* Main Content */}
-        <div className="md:ml-[250px] w-full">
-          
-          <main className="pt-6 px-6">
-
-          <Outlet/>
-          </main>
+        {/* Outlet for Nested Routes */}
+        <div className="p-4">
+          <Outlet />
         </div>
       </div>
-    </div>
     </div>
   )
 }

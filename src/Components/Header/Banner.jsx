@@ -6,9 +6,8 @@ import hospital3 from '../../assets/Images/hospital3.jpeg';
 import hospital4 from '../../assets/Images/hospital4.jpeg';
 import hospital5 from '../../assets/Images/hospital5.jpeg';
 
-export const Banner = () => {
+export default function Banner() {
   const [currentSlider, setCurrentSlider] = useState(0);
-
   const carouselSlides = [
     {
       image: hospital1,
@@ -37,17 +36,8 @@ export const Banner = () => {
     }
   ];
 
-  const prevSlider = () => {
-    setCurrentSlider((prev) =>
-      prev === 0 ? carouselSlides.length - 1 : prev - 1
-    );
-  };
-
-  const nextSlider = useCallback(() => {
-    setCurrentSlider((prev) =>
-      prev === carouselSlides.length - 1 ? 0 : prev + 1
-    );
-  }, [carouselSlides.length]);
+  const prevSlider = () => setCurrentSlider((currentSlider) => currentSlider === 0 ? carouselSlides.length - 1 : currentSlider - 1);
+  const nextSlider = useCallback(() => setCurrentSlider((currentSlider) => currentSlider === carouselSlides.length - 1 ? 0 : currentSlider + 1), [carouselSlides.length]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -57,63 +47,49 @@ export const Banner = () => {
   }, [nextSlider]);
 
   return (
-    <div className="h-60 md:h-[470px] lg:h-[540px] w-full overflow-hidden bg-white relative flex items-center justify-center mt-15">
-      {/* Left Arrow */}
-      <button
-        onClick={prevSlider}
-        className="absolute top-1/2 left-3 z-50 transform -translate-y-1/2 flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8"
-      >
-        <svg className="h-4 w-4 md:h-6 md:w-6 fill-black/50" viewBox="0 0 1024 1024">
-          <path d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z" />
-        </svg>
-      </button>
+    <div className="h-60 w-full md:h-[470px] lg:h-[540px] relative overflow-hidden">
 
-      {/* Right Arrow */}
-      <button
-        onClick={nextSlider}
-        className="absolute top-1/2 right-3 z-50 transform -translate-y-1/2 flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8"
-      >
-        <svg className="h-4 w-4 md:h-6 md:w-6 fill-black/50 transform rotate-180" viewBox="0 0 1024 1024">
-          <path d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z" />
-        </svg>
-      </button>
+  <button onClick={prevSlider} className="absolute top-1/2 left-3 z-50 flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
+    <svg className="icon h-4 w-4 fill-black/50 md:h-6 md:w-6" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"></path></svg>
+  </button>
 
-      {/* Dots */}
-      <div className="flex justify-center items-center z-50 absolute bottom-4 w-full gap-1">
-        {carouselSlides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentSlider(idx)}
-            className={`rounded-full duration-500 bg-black ${currentSlider === idx ? "w-8" : "w-2"} h-2`}
-          ></button>
-        ))}
+  <button onClick={nextSlider} className="absolute top-1/2 z-50 right-3 flex justify-center items-center bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
+    <svg className="icon h-4 w-4 fill-black/50 md:h-6 md:w-6" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)"><path d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"></path></svg>
+  </button>
+
+  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl sm:text-2xl md:text-3xl font-bold z-50">
+    <h3 className='space-y-3 text-purple-500 typewriter '>
+      {carouselSlides[currentSlider].title}
+    </h3>
+    <p className='text-xs md:text-xl'>{carouselSlides[currentSlider].description}</p>
+  </div>
+
+  <div className="flex justify-center items-center rounded-full z-50 absolute bottom-4 w-full gap-1">
+    {carouselSlides.map((img, idx) => (
+      <button 
+        key={`${img.title}_${idx}`} 
+        onClick={() => setCurrentSlider(idx)} 
+        className={`rounded-full duration-500 bg-white ${currentSlider === idx ? "w-8" : "w-2"} h-2`} 
+      />
+    ))}
+  </div>
+
+
+  <div className="ease-linear duration-500 flex transform-gpu " style={{ transform: `translateX(-${currentSlider * 100}%)` }}>
+    {carouselSlides.map((slide, idx) => (
+      <div className="relative min-w-full h-60 sm:h-96 md:h-[540px]">
+        <img 
+          key={slide.image} 
+          src={slide.image} 
+          className="w-full h-full object-cover" 
+          alt={`Slider - ${idx + 1}`} 
+        />
+     
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
+    ))}
+  </div>
+</div>
 
-      {/* Carousel Items */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out"
-        style={{ width: `${carouselSlides.length * 100}%`, transform: `translateX(-${currentSlider * 100}%)` }}
-      >
-        {carouselSlides.map((slide, idx) => (
-          <div
-            key={idx}
-            className="min-w-full h-60 sm:h-96 md:h-[540px] flex flex-col md:flex-row items-center justify-between bg-white text-black p-6 md:p-12"
-          >
-            <div className="md:w-1/2 text-center md:text-left space-y-4">
-              <h2 className="text-2xl md:text-4xl font-bold">{slide.title}</h2>
-              <p className="text-sm md:text-lg">{slide.description}</p>
-              <button className="bg-black text-white px-4 py-2 rounded shadow">
-                Learn More
-              </button>
-            </div>
-            <img
-              src={slide.image}
-              alt={`Slide ${idx + 1}`}
-              className="md:w-1/2 w-full h-48 md:h-full object-cover rounded shadow"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
   );
-};
+}

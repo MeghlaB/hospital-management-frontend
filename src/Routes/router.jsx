@@ -114,10 +114,10 @@ const router = createBrowserRouter([
 
 
       // user dashboard
-      {
-        path: "overview",
-        element: <Overview />,
-      },
+      // {
+      //   path: "overview",
+      //   element: <Overview />,
+      // },
       {
         path: "my-appoinments",
         element: <MyAppoinment></MyAppoinment>,

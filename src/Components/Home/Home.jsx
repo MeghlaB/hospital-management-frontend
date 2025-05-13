@@ -3,7 +3,7 @@ import React from "react";
 import Appointment from "../Ui/Home-journal/createAppoinment";
 import BannerWithNavbar from "../Ui/BannerWithNavbar";
 import Testimonials from "../Testimonials/Testimonilas";
-import { Banner } from "../Header/Banner";
+import Banner from '../Header/Banner'
 import UseAuth from "../../Hooks/UseAuth";
 import Search from "../Searches/Search";
 import DoctorSearchSection from "../Searches/Search";
@@ -12,7 +12,7 @@ import FeaturedDoctors from "../FeaturedDoctors/FeaturedDoctors";
 function Home() {
   return (
     <div>
-          <Banner />
+          <Banner/>
           <DoctorSearchSection/>
           <ChairmanMessage/>
           <FeaturedDoctors/>
