@@ -1,18 +1,12 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/UseAuth";
 import UseAdmin from "../../Hooks/UseAdmin";
 
 function Navbar() {
   const { user, logOut } = useAuth();
-  const [isAdmin] = UseAdmin();
-
-  const getDashboardLink = useCallback(() => {
-    if (isAdmin) {
-      return "/dashboard";
-    }
-    return "/dashboard/my-appoinments";
-  }, [isAdmin]);
+  const [isAdmin, isAdminLoading] = UseAdmin();
+  console.log(isAdmin)
 
   const handleLogout = () => {
     logOut()
@@ -22,15 +16,60 @@ function Navbar() {
       });
   };
 
+  const menuItems = (
+    <>
+      <li>
+        <Link
+          to="/"
+          className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/about"
+          className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
+        >
+          About
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/contact"
+          className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
+        >
+          Contact
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/doctor-list"
+          className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
+        >
+          Doctor List
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/doctor-appointment-booking"
+          className="hover:underline hover:underline-offset-6 hover:decoration-teal-600 transition-all duration-300"
+        >
+          Appointment
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <div className="navbar bg-white shadow-md sticky top-0 z-50">
+    <div className="navbar bg-base-100 shadow-sm lg:px-9">
+      {/* Left side */}
       <div className="navbar-start">
-        {/* Mobile Dropdown */}
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -39,56 +78,69 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[999] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/doctor-list">Doctor List</Link></li>
-            <li><Link to="/doctor-appointment-booking">Appointment</Link></li>
-            {user ? (
+            {menuItems}
+            {user && !isAdminLoading && (
               <>
-                <li><Link to={getDashboardLink()}>Dashboard</Link></li>
+                <li>
+                  <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/my-appoinments"}>
+                    Dashboard
+                  </Link>
+                </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded"
+                    className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
                   >
                     Logout
                   </button>
                 </li>
               </>
-            ) : (
+            )}
+            {!user && (
               <>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
+                <li>
+                  <Link
+                    to="/login"
+                    className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-md shadow"
+                  >
+                    Register
+                  </Link>
+                </li>
               </>
             )}
           </ul>
         </div>
-        <Link to="/" className="text-2xl font-bold text-teal-600 ml-2">
-          I-Health
+        <Link
+          className="btn btn-ghost text-xl text-teal-600 lg:text-2xl font-bold"
+          to="/"
+        >
+          In Health
         </Link>
       </div>
 
-      {/* Desktop Menu */}
+      {/* Center */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-2">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/doctor-list">Doctor List</Link></li>
-          <li><Link to="/doctor-appointment-booking">Appointment</Link></li>
-        </ul>
+        <ul className="menu menu-horizontal px-1 space-x-3">{menuItems}</ul>
       </div>
 
-      <div className="navbar-end hidden lg:flex items-center space-x-4">
+      {/* Right side */}
+      <div className="navbar-end hidden lg:flex">
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -103,9 +155,13 @@ function Navbar() {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box w-52 space-y-3 z-[999]"
             >
-              <li>
-                <Link to={getDashboardLink()}>Dashboard</Link>
-              </li>
+              {!isAdminLoading && (
+                <li>
+                  <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/my-appoinments"}>
+                    Dashboard
+                  </Link>
+                </li>
+              )}
               <li>
                 <button
                   onClick={handleLogout}

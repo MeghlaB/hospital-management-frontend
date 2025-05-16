@@ -58,7 +58,7 @@ export default function Banner() {
   </button>
 
   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl sm:text-2xl md:text-3xl font-bold z-50">
-    <h3 className='space-y-3 text-purple-500 typewriter '>
+    <h3 className='space-y-3 text-teal-500 typewriter '>
       {carouselSlides[currentSlider].title}
     </h3>
     <p className='text-xs md:text-xl'>{carouselSlides[currentSlider].description}</p>

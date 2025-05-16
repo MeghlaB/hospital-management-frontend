@@ -80,7 +80,7 @@ const router = createBrowserRouter([
     children: [
       // admin dashboard
       {
-        path: "",
+        path: "adminhome",
         element: <AdminHome />,
       },
       {

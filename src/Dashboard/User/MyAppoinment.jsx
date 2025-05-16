@@ -7,15 +7,21 @@ import Swal from 'sweetalert2';
 function MyAppointments() {
   const axiosPublic = UseAxiosPublic();
   const { user } = UseAuth();
-  const [filter, setFilter] = useState('all'); 
+  const [filter, setFilter] = useState('all');
 
   const { data: appointments = [], isLoading, refetch } = useQuery({
     queryKey: [user?.email, 'appointments'],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosPublic.get(`/appoinments/${user?.email}`);
-      console.log(res.data);
-      return res.data;
+      console.log("API response:", res.data);
+      // নিশ্চিত হও এটা একটি অ্যারে, নাহলে খালি অ্যারে রিটার্ন করো
+      if (Array.isArray(res.data)) {
+        return res.data;
+      } else {
+        console.error("Appointments data is not an array!", res.data);
+        return [];
+      }
     }
   });
 
@@ -51,13 +57,15 @@ function MyAppointments() {
     const appDate = appointment?.date ? new Date(appointment.date) : null;
 
     if (filter === 'upcoming') {
-      return appDate && appDate < today && appointment.status !== 'canceled';
+      // ভবিষ্যতের ডেট দেখাও, যা এখন থেকে বড়
+      return appDate && appDate >= today && appointment.status !== 'canceled';
     } else if (filter === 'Confirmed') {
-      return appointment.status === 'Confirmed';
+      // ক্যাপিটাল কেস 'Confirmed' হলে তা ইউজ করো, অথবা ডাটাবেস অনুযায়ী ছোট হাতেও হতে পারে
+      return appointment.status?.toLowerCase() === 'confirmed';
     } else if (filter === 'canceled') {
-      return appointment.status === 'canceled';
+      return appointment.status?.toLowerCase() === 'canceled';
     }
-    return true; // for 'all'
+    return true; // all appointments
   });
 
   return (
@@ -66,16 +74,28 @@ function MyAppointments() {
 
       {/* Filter Buttons */}
       <div className="mb-6 flex flex-wrap gap-3">
-        <button onClick={() => setFilter('all')} className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'all' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-700'}`}>
+        <button
+          onClick={() => setFilter('all')}
+          className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'all' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-700'}`}
+        >
           All
         </button>
-        <button onClick={() => setFilter('upcoming')} className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'upcoming' ? 'bg-blue-700 text-white' : 'bg-blue-100 text-blue-700'}`}>
+        <button
+          onClick={() => setFilter('upcoming')}
+          className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'upcoming' ? 'bg-blue-700 text-white' : 'bg-blue-100 text-blue-700'}`}
+        >
           Upcoming
         </button>
-        <button onClick={() => setFilter('Confirmed')} className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'Confirmed' ? 'bg-green-700 text-white' : 'bg-green-100 text-green-700'}`}>
+        <button
+          onClick={() => setFilter('Confirmed')}
+          className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'Confirmed' ? 'bg-green-700 text-white' : 'bg-green-100 text-green-700'}`}
+        >
           Completed
         </button>
-        <button onClick={() => setFilter('canceled')} className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'canceled' ? 'bg-red-700 text-white' : 'bg-red-100 text-red-700'}`}>
+        <button
+          onClick={() => setFilter('canceled')}
+          className={`px-4 py-2 rounded-lg shadow-md transition ${filter === 'canceled' ? 'bg-red-700 text-white' : 'bg-red-100 text-red-700'}`}
+        >
           Canceled
         </button>
       </div>
@@ -108,25 +128,39 @@ function MyAppointments() {
                   <td className="px-4 py-2">{appointment?.date || 'N/A'}</td>
                   <td className="px-4 py-2">{appointment?.time || 'N/A'}</td>
                   <td className="px-4 py-2">
-                    <span className={`px-2 py-1 rounded-full text-sm ${appointment?.status === 'completed' ? 'bg-green-200 text-green-700' : appointment?.status === 'canceled' ? 'bg-red-200 text-red-700' : 'bg-blue-200 text-blue-700'}`}>
+                    <span
+                      className={`px-2 py-1 rounded-full text-sm ${
+                        appointment?.status?.toLowerCase() === 'completed'
+                          ? 'bg-green-200 text-green-700'
+                          : appointment?.status?.toLowerCase() === 'canceled'
+                          ? 'bg-red-200 text-red-700'
+                          : 'bg-blue-200 text-blue-700'
+                      }`}
+                    >
                       {appointment?.status || 'pending'}
                     </span>
                   </td>
                   <td className="px-4 py-2 flex space-x-2">
-                    {appointment?.status === 'canceled' ? (
+                    {appointment?.status?.toLowerCase() === 'canceled' ? (
                       <button disabled className="px-4 py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed">
                         Canceled
                       </button>
-                    ) : appointment?.status === 'Confirmed' ? (
+                    ) : appointment?.status?.toLowerCase() === 'confirmed' ? (
                       <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
                         Completed
                       </button>
                     ) : (
-                      <button onClick={() => handleCancel(appointment._id)} className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                      <button
+                        onClick={() => handleCancel(appointment._id)}
+                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                      >
                         Cancel
                       </button>
                     )}
-                    <button onClick={() => Swal.fire('Coming Soon!', 'Rescheduling feature is coming soon!', 'info')} className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition">
+                    <button
+                      onClick={() => Swal.fire('Coming Soon!', 'Rescheduling feature is coming soon!', 'info')}
+                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition"
+                    >
                       Reschedule
                     </button>
                   </td>

@@ -4,6 +4,7 @@ import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import UseAuth from "../../Hooks/UseAuth";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Appoinment = () => {
   const { user } = UseAuth();
@@ -17,26 +18,40 @@ const Appoinment = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosPublic.get("/doctors");
-      setDoctors(res.data);
+      try {
+        const res = await axios.get("/doctors");
+        console.log("Doctors API response:", res.data);
+        // যদি API থেকে সরাসরি অ্যারে আসে:
+        if (Array.isArray(res.data)) {
+          setDoctors(res.data);
+        } else if (res.data && Array.isArray(res.data.doctors)) {
+          // যদি response এ doctors নামে অ্যারে থাকে
+          setDoctors(res.data.doctors);
+        } else {
+          setDoctors([]); // অন্য কোন unexpected data এ খালি রাখো
+          console.warn("Unexpected doctors data structure:", res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+        setDoctors([]);
+      }
     };
     fetchData();
-  }, [axiosPublic]);
+  }, []);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  
   } = useForm();
 
   const onSubmit = async (data) => {
     const bookingInfo = {
       ...data,
       email: user.email,
-      date: selectedDate || quickBookingDate, 
-      time: selectedTime || quickBookingTime, 
+      date: selectedDate || quickBookingDate,
+      time: selectedTime || quickBookingTime,
       doctorId: doctor?._id,
       doctorName: doctor?.name,
       status: "pending",
@@ -44,8 +59,7 @@ const Appoinment = () => {
 
     try {
       const res = await axiosPublic.post("/appoinments", bookingInfo);
-      // console.log(res.data)
-      reset()
+      reset();
       if (res.data.insertedId) {
         Swal.fire({
           title: "Appointment Booked Successfully",
@@ -55,11 +69,17 @@ const Appoinment = () => {
       }
     } catch (error) {
       console.log("Error submitting appointment:", error.message);
+      Swal.fire({
+        title: "Failed to book appointment",
+        text: error.message,
+        icon: "error",
+        draggable: true,
+      });
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br  from-white to-blue-50 py-10 px-4 md:px-10 text-gray-800 font-[Inter]">
+    <div className="min-h-screen bg-gradient-to-br from-white to-blue-50 py-10 px-4 md:px-10 text-gray-800 font-[Inter]">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-teal-700 mb-10">
           📅 Book an Appointment
@@ -69,7 +89,6 @@ const Appoinment = () => {
         <div className="mb-6 text-center">
           <button
             onClick={() => {
-              // Set quick booking date and time
               setQuickBookingDate("2025-05-15");
               setQuickBookingTime("10:00");
             }}
@@ -165,12 +184,17 @@ const Appoinment = () => {
             <select
               {...register("doctor", { required: "Please select a doctor" })}
               className="w-full border rounded px-3 py-2 focus:text-teal-600"
+              defaultValue={doctor?.name || ""}
             >
-              {doctors.map((doc) => (
-                <option key={doc._id} value={doc.name}>
-                  {doc.name}
-                </option>
-              ))}
+              {Array.isArray(doctors) && doctors.length > 0 ? (
+                doctors.map((doc) => (
+                  <option key={doc._id} value={doc.name}>
+                    {doc.name}
+                  </option>
+                ))
+              ) : (
+                <option disabled>Loading doctors...</option>
+              )}
             </select>
             {errors.doctor && (
               <span className="text-red-500 text-sm">{errors.doctor.message}</span>

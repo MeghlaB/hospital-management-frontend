@@ -9,6 +9,7 @@ import Search from "../Searches/Search";
 import DoctorSearchSection from "../Searches/Search";
 import ChairmanMessage from "../Message/Message";
 import FeaturedDoctors from "../FeaturedDoctors/FeaturedDoctors";
+import OurServices from "../ourServices/ourServices";
 function Home() {
   return (
     <div>
@@ -16,6 +17,7 @@ function Home() {
           <DoctorSearchSection/>
           <ChairmanMessage/>
           <FeaturedDoctors/>
+          <OurServices/>
           {/* <Appointment />
           <Testimonials /> */}
 

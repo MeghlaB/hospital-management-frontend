@@ -7,9 +7,12 @@ import { ImCross, ImMenu } from 'react-icons/im';
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [isAdmin] = UseAdmin()
-    // console.log(isAdmin)
+    const [isAdmin,loading] = UseAdmin()
+    console.log(isAdmin)
 
+if (loading) {
+  return <div>Loading...</div>;
+}
 
      const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

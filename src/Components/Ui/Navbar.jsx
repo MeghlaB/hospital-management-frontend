@@ -5,11 +5,12 @@ import UseAdmin from "../../Hooks/UseAdmin";
 
 function Navbar() {
   const { user, logOut } = useAuth();
+  console.log(user)
   const [isAdmin] = UseAdmin();
-
+  const dashboardLink = isAdmin ? "/dashboard/adminhome" : "/dashboard/my-appoinments";
   const getDashboardLink = useCallback(() => {
     if (isAdmin) {
-      return "/dashboard";
+      return "/dashboard/adminhome";
     }
     return "/dashboard/my-appoinments";
   }, [isAdmin]);
@@ -95,7 +96,8 @@ function Navbar() {
             {user && (
               <>
                 <li>
-                  <Link to={getDashboardLink()}>Dashboard</Link>
+                  {/* <Link to={getDashboardLink()}>Dashboard</Link> */}
+                    <Link to={dashboardLink}>Dashboard</Link>
                 </li>
                 <li>
                   <button

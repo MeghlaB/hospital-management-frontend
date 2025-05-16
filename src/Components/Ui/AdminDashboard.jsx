@@ -15,7 +15,7 @@ function AdminDashboard() {
       <div className="text-2xl font-bold mb-10">Admin</div>
 
       <div className="pb-4">
-        <Link to="/dashboard" className="flex items-center gap-3 hover:text-gray-300">
+        <Link to="/dashboard/adminhome" className="flex items-center gap-3 hover:text-gray-300">
           <Home size={20} />
           Admin Home
         </Link>
