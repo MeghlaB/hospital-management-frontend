@@ -10,6 +10,7 @@ import DoctorSearchSection from "../Searches/Search";
 import ChairmanMessage from "../Message/Message";
 import FeaturedDoctors from "../FeaturedDoctors/FeaturedDoctors";
 import OurServices from "../ourServices/ourServices";
+import Testimonial from "../Testimonial/Testimonial";
 function Home() {
   return (
     <div>
@@ -18,6 +19,7 @@ function Home() {
           <ChairmanMessage/>
           <FeaturedDoctors/>
           <OurServices/>
+          <Testimonial/>
           {/* <Appointment />
           <Testimonials /> */}
 

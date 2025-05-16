@@ -35,7 +35,7 @@ const FeaturedDoctors = () => {
                 {doctor.name}
               </h3>
               <p className="text-blue-600 font-medium">{doctor.specialty}</p>
-              <Link to={`/doctor-appointment-booking/${doctor._id}`}>
+              <Link to={`/doctor-appointment-booking`}>
                 <button className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition">
                   Book Now
                 </button>
