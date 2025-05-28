@@ -50,7 +50,7 @@ const AddDoctorForm = () => {
         };
         console.log(doctorinfo);
 
-        // Post doctor information to the backend
+      
         const doctorResponse = await axiosPublic.post(
           "/add-doctor",
           doctorinfo

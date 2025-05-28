@@ -9,7 +9,7 @@ function AppointmentDetails() {
   const axiosSequire = useAxiosSequire();
   const queryClient = useQueryClient();
 
-  // Get single appointment data
+
   const { data: appointment, isLoading, error } = useQuery({
     queryKey: ['appointment', id],
     queryFn: async () => {
@@ -18,7 +18,7 @@ function AppointmentDetails() {
     },
   });
 
-  // Confirm mutation
+
   const confirmMutation = useMutation({
     mutationFn: async () => {
       const res = await axiosSequire.put(`/appointment/${id}`, { status: 'confirmed' });
