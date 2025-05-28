@@ -28,8 +28,7 @@ export default function UserProfile() {
 
   return (
     <div className="w-full max-w-md mx-auto py-10 rounded-lg shadow-lg mt-10">
-      {/* Avatar */}
-      <div className="w-36 h-36 mx-auto mt-5 mb-6">
+        <div className="w-36 h-36 mx-auto mt-5 mb-6">
         <img
           src={profileData?.photo}
           className="w-36 h-36 rounded-full border-4 border-teal-700 shadow-lg"
@@ -37,7 +36,7 @@ export default function UserProfile() {
         />
       </div>
 
-      {/* Profile Info */}
+   
       <div className="px-6">
         <h1 className="text-xl font-semibold mb-3 text-center text-teal-700">
           <strong>Name:</strong> {profileData.name}

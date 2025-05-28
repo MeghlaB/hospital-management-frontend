@@ -4,37 +4,11 @@ import Swal from 'sweetalert2';
 
 export default function AvatarDropdown() {
     const{user} = UseAuth()
-    // console.log(user)
+
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
   const items = ['Profile', 'Dashboard', 'Settings', 'Log Out'];
- // handlelogout
-//   const handlelogout =()=>{
-//     logOut()
-//     .then(() => {
-//       Swal.fire({
-//         title: "Are you sure?",
-//         text: "User Logout",
-//         icon: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#3085d6",
-//         cancelButtonColor: "#d33",
-//         confirmButtonText: "Yes, delete it!"
-//       }).then((result) => {
-//         if (result.isConfirmed) {
-//           Swal.fire({
-//             title: "Deleted!",
-//             text: "Sign-out successful..",
-//             icon: "success"
-//           });
-//         }
-//       });
-//       // Sign-out successful.
-//     }).catch((error) => {
-//       console.log(error.message)
-//       // An error happened.
-//     });
-//   }
+ 
 
 
   useEffect(() => {
