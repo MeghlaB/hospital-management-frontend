@@ -50,9 +50,7 @@ export default function UserProfile() {
         <h2 className="text-lg mb-3">
           <strong>Role:</strong> {profileData.role}
         </h2>
-        {/* <h2 className="text-lg mb-6">
-          <strong>Role:</strong> {profileData.role}
-        </h2> */}
+       
 
         {/* Edit Button */}
         <Link to={`update/${profileData._id}`}>
