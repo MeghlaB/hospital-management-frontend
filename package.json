@@ -17,6 +17,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "firebase": "^11.6.0",
+    "framer-motion": "^12.18.1",
     "hospital-frontend": "file:",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.492.0",
