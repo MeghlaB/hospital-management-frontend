@@ -129,7 +129,7 @@ const FeaturedDoctors = () => {
                     )}
                   </div>
                   <Link 
-                    to={`/doctor-appointment-booking/${doctor._id}`}
+                    to={`/doctors/${doctor._id}`}
                     className="inline-block mt-6"
                   >
                     <motion.button 

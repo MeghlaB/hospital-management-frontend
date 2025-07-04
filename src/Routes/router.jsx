@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <DoctorList />,
       },
       {
-        path: "/doctor-appointment-booking/:id",
+        path: "/doctor-appointment-booking",
         element: (
           <Privetroutes>
             <Appoinment />

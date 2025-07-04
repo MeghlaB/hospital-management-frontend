@@ -142,7 +142,7 @@ function DoctorDetails() {
           {/* Book Appointment Button */}
           <div className="mt-8">
             <Link
-              to={`/doctor-appointment-booking/${doctor?._id}`}
+              to={`/doctor/${doctor?._id}`}
               state={{
                 doctorId: id,
                 doctorName: doctor?.name,
