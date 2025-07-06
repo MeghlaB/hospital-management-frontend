@@ -6,13 +6,13 @@ import UseAdmin from "../../Hooks/UseAdmin";
 function Navbar() {
   const { user, logOut } = useAuth();
   const [isAdmin, isAdminLoading] = UseAdmin();
-  console.log(isAdmin)
+  // console.log(isAdmin)
 
   const handleLogout = () => {
     logOut()
       .then(() => {})
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
   };
 

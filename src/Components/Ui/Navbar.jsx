@@ -5,7 +5,7 @@ import UseAdmin from "../../Hooks/UseAdmin";
 
 function Navbar() {
   const { user, logOut } = useAuth();
-  console.log(user)
+
   const [isAdmin] = UseAdmin();
   const dashboardLink = isAdmin ? "/dashboard/adminhome" : "/dashboard/my-appoinments";
   const getDashboardLink = useCallback(() => {

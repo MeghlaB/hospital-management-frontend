@@ -39,7 +39,7 @@ function BannerWithNavbar() {
             Swal.fire("Logged out!", "Sign-out successful.", "success");
           })
           .catch((error) => {
-            console.log(error.message);
+        
           });
       }
     });

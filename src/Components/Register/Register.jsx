@@ -69,11 +69,11 @@ function Register() {
               });
             })
             .catch((error) => {
-              console.error("Profile update failed", error);
+              // console.error("Profile update failed", error);
             });
         })
         .catch((error) => {
-          console.error("User creation failed", error);
+          // console.error("User creation failed", error);
         });
     }
   };

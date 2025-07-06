@@ -24,7 +24,7 @@ export default function DoctorSearchSection() {
       setDoctors(res.data);
     } catch (error) {
       setError("An error occurred while fetching doctors.");
-      console.error(error.message);
+      // console.error(error.message);
     } finally {
       setLoading(false);
     }

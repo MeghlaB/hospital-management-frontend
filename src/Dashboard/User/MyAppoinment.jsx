@@ -14,8 +14,8 @@ function MyAppointments() {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosPublic.get(`/appoinments/${user?.email}`);
-      console.log("API response:", res.data);
-      // নিশ্চিত হও এটা একটি অ্যারে, নাহলে খালি অ্যারে রিটার্ন করো
+
+      
       if (Array.isArray(res.data)) {
         return res.data;
       } else {
@@ -45,7 +45,7 @@ function MyAppointments() {
         refetch();
       } catch (error) {
         Swal.fire('Error!', 'Something went wrong.', 'error');
-        console.error(error);
+      
       }
     }
   };

@@ -13,13 +13,13 @@ function Login() {
         const from = e.target
         const email = from.email.value
         const password = from.password.value
-        console.log(email,password)
+        // console.log(email,password)
         
         // user login 
         signIn(email,password)
         .then((userCredential)=>{
             const user = userCredential.user
-            console.log(user)
+            // console.log(user)
             Swal.fire({
                 position: "top-center",
                 icon: "success",
@@ -28,7 +28,7 @@ function Login() {
                 timer: 1500
               });
               navigate('/')
-            console.log(user)
+            // console.log(user)
         })
 
     }
@@ -36,7 +36,7 @@ function Login() {
       const handleGoogleSign = ()=>{
         GoogleLogin()
         .then(res=>{
-          console.log(res.user)
+        //   console.log(res.user)
           const userInfo = {
             email:res.user?.email,
             name:res.user?.displayName,

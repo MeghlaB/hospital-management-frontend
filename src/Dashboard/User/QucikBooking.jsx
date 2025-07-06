@@ -21,15 +21,15 @@ const Appoinment = () => {
       try {
         const res = await axios.get("/doctors");
         console.log("Doctors API response:", res.data);
-        // যদি API থেকে সরাসরি অ্যারে আসে:
+     
         if (Array.isArray(res.data)) {
           setDoctors(res.data);
         } else if (res.data && Array.isArray(res.data.doctors)) {
-          // যদি response এ doctors নামে অ্যারে থাকে
+      
           setDoctors(res.data.doctors);
         } else {
-          setDoctors([]); // অন্য কোন unexpected data এ খালি রাখো
-          console.warn("Unexpected doctors data structure:", res.data);
+          setDoctors([]); 
+   
         }
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -68,7 +68,7 @@ const Appoinment = () => {
         });
       }
     } catch (error) {
-      console.log("Error submitting appointment:", error.message);
+   
       Swal.fire({
         title: "Failed to book appointment",
         text: error.message,

@@ -30,7 +30,7 @@ export default function EditProfile() {
             navigate('/dashboard/user-profile');
         }
     } catch (error) {
-        console.error('Error updating profile:', error);
+        
         Swal.fire('Error', 'Something went wrong.', 'error');
     }
 };

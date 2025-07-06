@@ -62,7 +62,7 @@ const AddDoctorForm = () => {
         }
       }
     } catch (error) {
-      console.error("Error:", error);
+ 
       Swal.fire({
         title: "Error!",
         text: error.response?.data?.message || "Failed to add doctor",
