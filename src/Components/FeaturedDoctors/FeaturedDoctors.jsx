@@ -73,7 +73,8 @@ const FeaturedDoctors = () => {
   if (error) {
     return (
       <div className="py-12 text-center text-red-500">
-        <p>Error loading doctors: {error}</p>
+      <span className="loading loading-ring loading-xs"></span>
+        {/* <p>Error loading doctors: {error}</p> */}
       </div>
     );
   }

@@ -62,7 +62,7 @@ function Navbar() {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm lg:px-9">
+    <div className=" navbar fixed top-0 z-50 w-full bg-base-100 shadow-sm lg:px-9">
       {/* Left side */}
       <div className="navbar-start">
         <div className="dropdown">

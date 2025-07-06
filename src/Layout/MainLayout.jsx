@@ -17,7 +17,7 @@ function MainLayout() {
     <div>
     <Navbar/>
       {/* {!noheaderFooter && (isHome ?<BannerWithNavbar/> :<Navbar/>)} */}
-      <div className="min-h-[calc(100vh-288px)] mb-15">
+      <div className="min-h-[calc(100vh-288px)] mb-15 ">
         <Outlet />
       </div>
       <Footer/>
