@@ -22,7 +22,7 @@ function DoctorList() {
 
   if (isLoading) {
     return (
-      <p className="text-center text-gray-500 mt-10">Loading doctors...</p>
+      <span className="loading loading-ring loading-xs"></span>
     );
   }
 

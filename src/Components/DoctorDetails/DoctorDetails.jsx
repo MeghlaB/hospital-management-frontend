@@ -31,7 +31,7 @@ function DoctorDetails() {
     for (let i = 0; i < 7; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      const formatted = format(date, "EEE d"); // Example: "Mon 5"
+      const formatted = format(date, "EEE d"); 
       days.push(formatted.toUpperCase());
     }
 
@@ -54,7 +54,7 @@ function DoctorDetails() {
 
   if (isLoading) {
     return (
-      <p className="text-center mt-10 text-gray-500">Loading doctor details...</p>
+      <span className="loading loading-ring loading-xs"></span>
     );
   }
 
@@ -142,7 +142,7 @@ function DoctorDetails() {
           {/* Book Appointment Button */}
           <div className="mt-8">
             <Link
-              to={`/doctor/${doctor?._id}`}
+              to={`/doctor-appointment-booking/${doctor?._id}`}
               state={{
                 doctorId: id,
                 doctorName: doctor?.name,
