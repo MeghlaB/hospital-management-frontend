@@ -82,37 +82,39 @@ function DoctorList() {
                 </span>
               </p>
             ) : (
-              filteredDoctors.map((doctor) => (
-                <div
-                  key={doctor._id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
-                >
-                  <figure className="h-48 md:h-56 overflow-hidden">
-                    <img
-                      src={doctor.image}
-                      alt={doctor.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </figure>
-                  <div className="p-4 space-y-1.5">
-                    <h2 className="text-sm font-medium text-green-600 flex items-center gap-1">
-                      <span className="text-lg font-bold text-green-500">•</span>
-                      {doctor.status}
-                    </h2>
-                    <p className="text-lg font-bold text-gray-800">
-                      {doctor.name}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {doctor.specialization}
-                    </p>
-                    <Link to={`/doctors/${doctor._id}`}>
-                      <button className="mt-3 w-full bg-[#00786F] text-white py-2 rounded-xl hover:bg-[#00665F] transition">
-                        Doctor Details
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              ))
+             filteredDoctors.map((doctor) => (
+  <div
+    key={doctor._id}
+    className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition duration-300"
+  >
+    <figure className="h-48 md:h-52 overflow-hidden rounded-t-2xl">
+      <img
+        src={doctor.image}
+        alt={doctor.name}
+        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+      />
+    </figure>
+    <div className="p-4 space-y-2">
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold text-gray-800">
+          {doctor.name}
+        </h2>
+        <span className={`text-xs font-semibold px-2 py-1 rounded-full 
+          ${doctor.status === 'Available' 
+            ? 'bg-green-100 text-green-700' 
+            : 'bg-red-100 text-red-700'}`}>
+          {doctor.status}
+        </span>
+      </div>
+      <p className="text-sm text-gray-500">{doctor.specialization}</p>
+      <Link to={`/doctors/${doctor._id}`}>
+        <button className="mt-3 w-full bg-[#00786F] text-white text-sm font-medium py-2 rounded-xl hover:bg-[#00665F] transition duration-200">
+          View Profile
+        </button>
+      </Link>
+    </div>
+  </div>
+))
             )}
           </div>
         </div>
