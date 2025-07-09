@@ -28,11 +28,11 @@ const testimonials = [
     image: 'https://randomuser.me/api/portraits/women/3.jpg',
     rating: 5
   },
-  // ... (other testimonials with added rating property)
+
 ];
 
 const Testimonial = () => {
-  // Animation variants
+ 
   const container = {
     hidden: { opacity: 0 },
     visible: {
