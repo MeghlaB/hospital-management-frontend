@@ -12,21 +12,21 @@ const testimonials = [
     feedback: 'Excellent hospital with professional staff and world-class service. The facilities are top-notch and patient care is exceptional.',
     designation: 'Cardiologist',
     image: 'https://randomuser.me/api/portraits/women/1.jpg',
-    rating: 5
+    rating: 6
   },
   {
     name: 'Md. Rayhan Ahmed',
     feedback: 'Their emergency response is very quick and helpful! Saved my father during a critical situation.',
     designation: 'Patient',
     image: 'https://randomuser.me/api/portraits/men/2.jpg',
-    rating: 4
+    rating: 9
   },
   {
     name: 'Dr. Rima Akter',
     feedback: 'Modern diagnostic lab and experienced doctors. Highly recommended for accurate diagnoses.',
     designation: 'Radiologist',
     image: 'https://randomuser.me/api/portraits/women/3.jpg',
-    rating: 5
+    rating: 7
   },
 
 ];
