@@ -39,7 +39,7 @@ const OurServices = () => {
               className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition"
             >
               <h3 className="text-xl font-semibold text-teal-700 mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+              <p className="text-gray-500">{service.description}</p>
             </div>
           ))}
         </div>
