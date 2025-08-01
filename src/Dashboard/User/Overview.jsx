@@ -8,7 +8,7 @@ const Overview = () => {
     // Fetch appointments from the backend
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get("https://hospital-server-peach.vercel.app/appointments");
+        const response = await axios.get("https://hospita-management-server.onrender.com/appointments");
         setAppointments(response.data);
       } catch (error) {
         console.error("Error fetching appointments", error);

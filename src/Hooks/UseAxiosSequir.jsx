@@ -4,7 +4,8 @@ import UseAuth from '../Hooks/UseAuth'
 import { useEffect } from 'react'
 
 const axiosSequire = axios.create({
-  baseURL:"https://hospital-server-peach.vercel.app",
+  // baseURL:"https://hospita-management-server.onrender.com",
+      baseURL:"https://hospita-management-server.onrender.com",
   // baseURL: "http://localhost:5000",
   withCredentials: true,
 })

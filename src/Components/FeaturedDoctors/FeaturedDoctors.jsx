@@ -7,26 +7,48 @@ const FeaturedDoctors = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await fetch("https://hospital-server-peach.vercel.app/doctors");
-        if (!response.ok) {
-          throw new Error("Failed to fetch doctors");
-        }
-        const data = await response.json();
-        setDoctors(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchDoctors = async () => {
+  //     try {
+  //       // const response = await fetch("http://localhost:5000/doctors");
+  //       const response = await fetch("https://hospital-server-qedbpugkw-meghlas-projects-b9235c9a.vercel.app/doctors");
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch doctors");
+  //       }
+  //       const data = await response.json();
+  //       setDoctors(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchDoctors();
-  }, []);
+  //   fetchDoctors();
+  // }, []);
 
   // Animation variants
+  useEffect(() => {
+  const fetchDoctors = async () => {
+    const start = performance.now();
+    try {
+      const response = await fetch("https://hospita-management-server.onrender.com/doctors");
+      const data = await response.json();
+      setDoctors(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      const end = performance.now();
+      console.log(`⏱ Data fetched in ${Math.round(end - start)}ms`);
+    }
+  };
+
+  fetchDoctors();
+}, []);
+
+  
+  
   const container = {
     hidden: { opacity: 0 },
     visible: {

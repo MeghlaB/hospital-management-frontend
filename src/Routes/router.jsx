@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         path:'all-appoinments/appointments/:id',
         
         element:<AppoinmentDetails/>,
-        loader: ({ params }) => fetch(`https://hospital-server-peach.vercel.app/${params.id}`)
+        loader: ({ params }) => fetch(`https://hospita-management-server.onrender.com/${params.id}`)
       },
 
 
@@ -142,7 +142,7 @@ const router = createBrowserRouter([
         path: "user-profile/update/:id",
         element: <Edit></Edit>,
         loader: ({ params }) =>
-          fetch(`https://hospital-server-peach.vercel.app/users/${params.id}`),
+          fetch(`https://hospita-management-server.onrender.com/users/${params.id}`),
       },
 
     ],
