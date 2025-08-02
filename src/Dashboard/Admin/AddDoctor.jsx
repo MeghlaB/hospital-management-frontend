@@ -79,14 +79,14 @@ const AddDoctorForm = () => {
         <div className="bg-gradient-to-r from-primary-600 to-primary-800 p-6 text-white relative">
           <button 
             onClick={() => navigate(-1)}
-            className="absolute left-6 top-6 flex items-center text-black hover:text-gray-200 transition-colors"
+            className="absolute left-6 top-6 border px-3 rounded-2xl  flex items-center text-black hover:text-teal-500 transition-colors"
           >
             <FiArrowLeft className="mr-1" />
             Back
           </button>
           <div className="text-center pt-2">
-            <h2 className="text-2xl font-bold">Add New Doctor</h2>
-            <p className="text-teal-200">Fill in the details to register a new doctor</p>
+            <h2 className=" text-teal-900 text-2xl font-bold">Add New Doctor</h2>
+            <p className="text-teal-600">Fill in the details to register a new doctor</p>
           </div>
         </div>
 
