@@ -24,7 +24,7 @@ if (loading) {
         className={`fixed top-0 bg-gray-800 text-white left-0 z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } transition-transform duration-300 w-80 min-h-screen p-4 `}
       >
-        {/* Close Button */}
+        
         <button
           onClick={toggleSidebar}
           className={`btn bg-red-950 text-white btn-sm absolute top-2 right-4`}

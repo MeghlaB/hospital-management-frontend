@@ -39,7 +39,6 @@ function AdminHome() {
     },
   });
 
-  // all users
   const { data: users = [], isLoading: usersLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -48,12 +47,12 @@ function AdminHome() {
     },
   });
 
-  // Calculate pending appointments
+
   const pendingAppointments = appointments.filter(
     (app) => app.status === "pending"
   ).length;
 
-  // Calculate revenue (example calculation)
+
   const revenue = appointments.reduce(
     (total, app) => total + (app.fee || 0),
     0
