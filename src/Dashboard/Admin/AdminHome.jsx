@@ -185,9 +185,9 @@ function AdminHome() {
         </div>
       </div>
 
-      {/* Secondary Stats */}
+   
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Pending Appointments */}
+      
         <MiniStatCard
           title="Pending Appointments"
           value={pendingAppointments}
@@ -195,7 +195,7 @@ function AdminHome() {
           color="bg-yellow-100 text-yellow-600"
         />
 
-        {/* Available Doctors */}
+     
         <MiniStatCard
           title="Available Doctors"
           value={doctors.filter((d) => d.status).length}
@@ -203,7 +203,7 @@ function AdminHome() {
           color="bg-green-100 text-green-600"
         />
 
-        {/* New Patients This Month */}
+     
         <MiniStatCard
           title="New Patients (30d)"
           value={(() => {
