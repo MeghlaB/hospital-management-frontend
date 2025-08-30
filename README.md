@@ -5,7 +5,7 @@ A modern and responsive frontend web application built with **React.js** for man
 ## 🚀 Live Site
 
 [Visit the Live Website](https://your-live-link.com)  
-*(Replace this with your deployed link, e.g., Vercel/Netlify)*
+
 
 ---
 
