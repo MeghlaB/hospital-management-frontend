@@ -1,4 +1,4 @@
-# 🏥 Hospital Management Frontend
+#  Hospital Management Frontend
 
 A modern and responsive frontend web application built with **React.js** for managing hospital operations such as doctor listings, appointments, and user interactions. This is the frontend part of a complete hospital management system.
 
@@ -17,11 +17,11 @@ A modern and responsive frontend web application built with **React.js** for man
 
 ---
 
-## ⚙️ Features
+## Features
 
-- 👨‍⚕️ List of featured and available doctors
-- 📅 Appointment scheduling UI
-- 🔐 User authentication pages (login/register)
+-  List of featured and available doctors
+-  Appointment scheduling UI
+   User authentication pages (login/register)
 - 📱 Responsive design (mobile-first)
 - 💬 Clean and interactive UI using Tailwind CSS / DaisyUI
 - 🔄 Dynamic data fetching from backend API
