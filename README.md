@@ -29,7 +29,7 @@ A modern and responsive frontend web application built with **React.js** for man
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Tech            | Description                      |
 |-----------------|----------------------------------|
@@ -42,7 +42,7 @@ A modern and responsive frontend web application built with **React.js** for man
 
 ---
 
-## 🧩 Folder Structure
+##  Folder Structure
 src/
 ├── assets/ # Images, logos
 ├── components/ # Reusable UI components
@@ -56,7 +56,7 @@ src/
 
 ---
 
-## 🧑‍💻 Getting Started
+##  Getting Started
 
 1. **Clone the repository**
 ```bash
