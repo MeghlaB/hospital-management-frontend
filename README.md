@@ -22,10 +22,10 @@ A modern and responsive frontend web application built with **React.js** for man
 -  List of featured and available doctors
 -  Appointment scheduling UI
    User authentication pages (login/register)
-- 📱 Responsive design (mobile-first)
-- 💬 Clean and interactive UI using Tailwind CSS / DaisyUI
-- 🔄 Dynamic data fetching from backend API
-- ✨ Modern UI animations using Framer Motion
+   Responsive design (mobile-first)
+-  Clean and interactive UI using Tailwind CSS / DaisyUI
+-  Dynamic data fetching from backend API
+- Modern UI animations using Framer Motion
 
 ---
 
