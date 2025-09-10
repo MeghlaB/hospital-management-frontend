@@ -2,7 +2,6 @@
 
 A modern and responsive frontend web application built with **React.js** for managing hospital operations such as doctor listings, appointments, and user interactions. This is the frontend part of a complete hospital management system.
 
-##  Live Site
 
 
 
