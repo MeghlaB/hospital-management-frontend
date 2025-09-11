@@ -72,7 +72,7 @@ npm run dev
 
 3.**Visit on browser**
 
-arduino
+
 http://localhost:5173
 
 
